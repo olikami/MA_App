@@ -60,7 +60,7 @@ struct ChatView: View {
                                                scrollView.scrollTo(last.id)
                                            }
                                        }else{
-                                           print("nilllllyo")
+                                           print("No last message")
                                        }
                                     }
                                     
