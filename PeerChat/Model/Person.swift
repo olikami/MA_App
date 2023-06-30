@@ -21,7 +21,6 @@ struct Person: Codable, Equatable, Hashable {
 
   init(_ name: String, id: UUID) {
     self.name = name
-
     self.id = id
   }
 
