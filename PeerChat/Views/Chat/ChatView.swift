@@ -43,7 +43,7 @@ struct ChatView: View {
                     HStack {
                         TextField("Enter a message", text: $newMessage,axis: .vertical)
                             .textFieldStyle(RoundedTextFieldStyle())
-                            .animation(.spring())
+                            .animation(.spring(), value: newMessage)
                             .padding(.horizontal)
 
                         if !newMessage.isEmpty {
@@ -70,7 +70,7 @@ struct ChatView: View {
                                     .font(.system(size: 24, weight: .bold))
                                     .foregroundColor(.blue)
                             }
-                            .animation(.spring())
+                            .animation(.spring(), value: newMessage)
                         }
                     }
                     .padding()
@@ -80,4 +80,14 @@ struct ChatView: View {
         }
     }
     
+}
+
+struct ChatView_Previews: PreviewProvider {
+    
+    static var model = Model()
+    static var person = Person(MCPeerID(displayName: UIDevice.current.name), id: UUID())
+    
+    static var previews: some View {
+        ChatView(person: person).environmentObject(model)
+    }
 }
