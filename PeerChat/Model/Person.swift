@@ -19,7 +19,7 @@ struct Person: Codable, Equatable, Hashable {
     hasher.combine(self.id)
   }
 
-    init(_ name: String, id: UUID) {
+  init(_ name: String, id: UUID) {
     self.name = name
 
     self.id = id
