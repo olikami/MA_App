@@ -82,7 +82,7 @@ struct ChatView: View {
 struct ChatView_Previews: PreviewProvider {
 
   static var model = Model()
-  static var person = Person(MCPeerID(displayName: UIDevice.current.name), id: UUID())
+  static var person = Person(UIDevice.current.name, id: UUID())
 
   static var previews: some View {
     ChatView(person: person).environmentObject(model)

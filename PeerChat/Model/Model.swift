@@ -23,29 +23,6 @@ struct Message: Codable, Hashable {
   }
 }
 
-struct Person: Codable, Equatable, Hashable {
-  var name: String
-  let id: UUID
-
-  static func == (lhs: Person, rhs: Person) -> Bool {
-    return lhs.id == rhs.id
-  }
-
-  func hash(into hasher: inout Hasher) {
-    hasher.combine(self.id)
-  }
-
-  init(_ peer: MCPeerID, id: UUID) {
-    self.name = peer.displayName
-
-    self.id = id
-  }
-
-  mutating func setName(newName: String) {
-    self.name = newName
-  }
-}
-
 struct Chat: Equatable {
   static func == (lhs: Chat, rhs: Chat) -> Bool {
     return lhs.id == rhs.id
@@ -97,7 +74,7 @@ class Model: NSObject, ObservableObject {
     serviceAdvertiser = MCNearbyServiceAdvertiser(
       peer: myPeerId, discoveryInfo: nil, serviceType: serviceType)
     serviceBrowser = MCNearbyServiceBrowser(peer: myPeerId, serviceType: serviceType)
-    myPerson = Person(self.session.myPeerID, id: UIDevice.current.identifierForVendor!)
+    myPerson = Person(UIDevice.current.name, id: UIDevice.current.identifierForVendor!)
 
     super.init()
 
