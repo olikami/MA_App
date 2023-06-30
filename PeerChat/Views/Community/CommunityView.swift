@@ -16,7 +16,9 @@ struct CommunityView: View {
 }
 
 struct CommunityView_Previews: PreviewProvider {
+
+  static var model = Model()
   static var previews: some View {
-    CommunityView()
+    CommunityView().environmentObject(model)
   }
 }
