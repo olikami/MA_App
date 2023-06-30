@@ -20,7 +20,7 @@ struct SettingsView: View {
                         "Name",
                         text: $name
                     ).onChange(of: name){newValue in
-                        print("Name is now: \(newValue)")
+                        model.setName(newName: newValue)
                     }
                 }
             }

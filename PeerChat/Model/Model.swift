@@ -26,7 +26,7 @@ struct Message: Codable,Hashable {
 }
 
 struct Person: Codable,Equatable,Hashable {
-    let name: String
+    var name: String
     let id: UUID
     
     static func == (lhs: Person, rhs: Person) -> Bool {
@@ -41,6 +41,10 @@ struct Person: Codable,Equatable,Hashable {
         self.name = peer.displayName
         
         self.id = id
+    }
+    
+    mutating func setName(newName: String) {
+        self.name = newName
     }
 }
 
@@ -91,6 +95,8 @@ class Model: NSObject, ObservableObject {
     @Published var connectedPeers: [MCPeerID] = []
     @Published var chats: Dictionary<Person,Chat> = [:]
     
+    @Published var displayName: String
+    
     var myPerson:Person
     
     override init() {
@@ -98,6 +104,7 @@ class Model: NSObject, ObservableObject {
         serviceAdvertiser = MCNearbyServiceAdvertiser(peer: myPeerId, discoveryInfo: nil, serviceType: serviceType)
         serviceBrowser = MCNearbyServiceBrowser(peer: myPeerId, serviceType: serviceType)
         myPerson = Person(self.session.myPeerID,id: UIDevice.current.identifierForVendor!)
+        displayName = self.session.myPeerID.displayName
         
         super.init()
 
@@ -110,6 +117,9 @@ class Model: NSObject, ObservableObject {
         
     }
     
+    func setName(newName: String) {
+        self.myPerson.setName(newName: newName)
+    }
     
     func send(_ messageText: String,chat: Chat) {
         print("send: \(messageText) to \(chat.peer.displayName)")
