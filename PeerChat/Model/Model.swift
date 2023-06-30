@@ -91,8 +91,6 @@ class Model: NSObject, ObservableObject {
   @Published var connectedPeers: [MCPeerID] = []
   @Published var chats: [Person: Chat] = [:]
 
-  @Published var displayName: String
-
   var myPerson: Person
 
   override init() {
@@ -101,7 +99,6 @@ class Model: NSObject, ObservableObject {
       peer: myPeerId, discoveryInfo: nil, serviceType: serviceType)
     serviceBrowser = MCNearbyServiceBrowser(peer: myPeerId, serviceType: serviceType)
     myPerson = Person(self.session.myPeerID, id: UIDevice.current.identifierForVendor!)
-    displayName = self.session.myPeerID.displayName
 
     super.init()
 
