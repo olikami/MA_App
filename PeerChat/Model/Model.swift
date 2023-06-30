@@ -2,7 +2,6 @@
 //  Model.swift
 //  PeerToPeerApp
 //
-//  Created by Oliver Kamer on 5/18/23.
 //
 
 import Foundation
@@ -81,10 +80,10 @@ struct ConnectMessage: Codable {
 class Model: NSObject, ObservableObject {
 
   private let serviceType = "PeerChat"
-  private let myPeerId = MCPeerID(displayName: UIDevice.current.name)
-  private let serviceAdvertiser: MCNearbyServiceAdvertiser
-  private let serviceBrowser: MCNearbyServiceBrowser
-  private let session: MCSession
+  private var myPeerId = MCPeerID(displayName: UIDevice.current.name)
+  private var serviceAdvertiser: MCNearbyServiceAdvertiser
+  private var serviceBrowser: MCNearbyServiceBrowser
+  private var session: MCSession
   private let encoder = PropertyListEncoder()
   private let decoder = PropertyListDecoder()
 
@@ -113,6 +112,31 @@ class Model: NSObject, ObservableObject {
 
   func setName(newName: String) {
     self.myPerson.setName(newName: newName)
+    self.setPeerName(newName)
+  }
+
+  func setPeerName(_ newName: String) {
+    // Stop advertising and browsing with old MCPeerID
+    self.serviceAdvertiser.stopAdvertisingPeer()
+    self.serviceBrowser.stopBrowsingForPeers()
+
+    // Create a new MCPeerID with new name
+    self.myPeerId = MCPeerID(displayName: newName)
+
+    // Create new service advertiser, browser and session with the new MCPeerID
+    self.session = MCSession(peer: myPeerId, securityIdentity: nil, encryptionPreference: .none)
+    self.serviceAdvertiser = MCNearbyServiceAdvertiser(
+      peer: myPeerId, discoveryInfo: nil, serviceType: serviceType)
+    self.serviceBrowser = MCNearbyServiceBrowser(peer: myPeerId, serviceType: serviceType)
+
+    // Set delegates for new objects
+    session.delegate = self
+    serviceAdvertiser.delegate = self
+    serviceBrowser.delegate = self
+
+    // Start advertising and browsing with the new MCPeerID
+    serviceAdvertiser.startAdvertisingPeer()
+    serviceBrowser.startBrowsingForPeers()
   }
 
   func send(_ messageText: String, chat: Chat) {
