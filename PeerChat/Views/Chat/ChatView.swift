@@ -46,7 +46,6 @@ struct ChatView: View {
                             .animation(.spring(), value: newMessage)
                             .padding(.horizontal)
 
-                        if !newMessage.isEmpty {
                             Button {
                                 if(!newMessage.isEmpty){
                                     DispatchQueue.main.async {
@@ -69,11 +68,12 @@ struct ChatView: View {
                                 Image(systemName: "arrow.up.circle.fill")
                                     .font(.system(size: 24, weight: .bold))
                                     .foregroundColor(.blue)
+                                    .opacity(newMessage.isEmpty ? 0: 1).animation(.spring(), value: newMessage)
                             }
+                            .frame(maxWidth: newMessage.isEmpty ? 0: nil)
                             .animation(.spring(), value: newMessage)
-                        }
-                    }
-                    .padding()
+                        
+                    }.padding()
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
