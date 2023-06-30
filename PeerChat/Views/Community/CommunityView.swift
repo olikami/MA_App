@@ -8,15 +8,15 @@
 import SwiftUI
 
 struct CommunityView: View {
-    @EnvironmentObject private var model: Model
-    
-    var body: some View {
-        Text("Hello, \(model.myPerson.name)!")
-    }
+  @EnvironmentObject private var model: Model
+
+  var body: some View {
+    Text("Hello, \(model.myPerson.name)!")
+  }
 }
 
 struct CommunityView_Previews: PreviewProvider {
-    static var previews: some View {
-        CommunityView()
-    }
+  static var previews: some View {
+    CommunityView()
+  }
 }

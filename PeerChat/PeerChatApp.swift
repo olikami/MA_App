@@ -9,13 +9,13 @@ import SwiftUI
 
 @main
 struct PeerChatApp: App {
-    @ObservedObject private var model = Model()
+  @ObservedObject private var model = Model()
 
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-                .environmentObject(model)
-            
-        }
+  var body: some Scene {
+    WindowGroup {
+      ContentView()
+        .environmentObject(model)
+
     }
+  }
 }
