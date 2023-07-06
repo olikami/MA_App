@@ -13,7 +13,7 @@ struct ChatMessageRow: View {
   let geo: GeometryProxy
 
   var isCurrentUser: Bool {
-    message.from.id == model.nearby.myPerson.id
+    message.from.id == model.nearby?.myPerson.id
   }
 
   var body: some View {
