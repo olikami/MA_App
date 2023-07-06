@@ -4,6 +4,7 @@
 //
 //
 
+import Combine
 import Foundation
 import MultipeerConnectivity
 
@@ -67,7 +68,8 @@ class Nearby: NSObject {
   @Published var connectedPeers: [MCPeerID] = []
   @Published var chats: [Person: Chat] = [:]
 
-  var myPerson: Person
+  @Published var myPerson: Person
+  private var cancellables = Set<AnyCancellable>()
 
   init(person: Person) {
     session = MCSession(peer: myPeerId, securityIdentity: nil, encryptionPreference: .none)
@@ -85,11 +87,17 @@ class Nearby: NSObject {
     serviceAdvertiser.startAdvertisingPeer()
     serviceBrowser.startBrowsingForPeers()
 
+    // To observer the changes
+    observePersonChanges()
   }
 
-  func setName(newName: String) {
-    self.myPerson.setName(newName: newName)
-    self.setPeerName(newName)
+  private func observePersonChanges() {
+    myPerson.$name
+      .sink { newName in
+        // Do something when name changes
+        self.setPeerName(newName)
+      }
+      .store(in: &cancellables)
   }
 
   func setPeerName(_ newName: String) {
