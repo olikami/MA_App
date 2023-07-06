@@ -10,6 +10,7 @@ import SwiftUI
 struct SettingsView: View {
 
   @EnvironmentObject private var model: Model
+
   @State private var name: String = ""
   @FocusState private var nameIsFocused: Bool
 
@@ -33,10 +34,10 @@ struct SettingsView: View {
               Image(systemName: "checkmark.circle.fill")
                 .font(.system(size: 24, weight: .bold))
                 .foregroundColor(.blue)
-                .opacity(isNameChanged ? 1 : 0).animation(.spring(), value: name)
+                .opacity(isNameChanged ? 1 : 0).animation(.spring(), value: isNameChanged)
             }
             .frame(maxWidth: isNameChanged ? nil : 0)
-            .animation(.spring(), value: name)
+            .animation(.spring(), value: isNameChanged)
 
           }
         }

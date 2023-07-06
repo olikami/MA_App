@@ -36,6 +36,9 @@ struct NearbyView: View {
             }
           }
         }
+        Section("You") {
+          Text("\(model.nearby.myPerson.name)")
+        }
       }
     }
   }
