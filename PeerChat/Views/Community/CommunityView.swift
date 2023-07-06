@@ -11,7 +11,7 @@ struct CommunityView: View {
   @EnvironmentObject private var model: Model
 
   var body: some View {
-    Text("Hello, \(model.myPerson.name)!")
+    Text("Hello, \(model.person.name)!")
   }
 }
 

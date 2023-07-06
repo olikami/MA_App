@@ -20,15 +20,15 @@ struct ChatView: View {
         VStack {
           ScrollView {
             VStack(spacing: 4) {
-              ForEach(model.chats[person]!.messages, id: \.id) { message in
+              ForEach(model.nearby.chats[person]!.messages, id: \.id) { message in
                 ChatMessageRow(message: message, geo: geometry)
                   .padding(.horizontal)
               }
             }
           }
-          .onChange(of: model.chats[person]!.messages) { new in
+          .onChange(of: model.nearby.chats[person]!.messages) { new in
             DispatchQueue.main.async {
-              if let last = model.chats[person]!.messages.last {
+              if let last = model.nearby.chats[person]!.messages.last {
                 withAnimation(.spring()) {
                   scrollView.scrollTo(last.id)
                 }
@@ -46,11 +46,11 @@ struct ChatView: View {
             Button {
               if !newMessage.isEmpty {
                 DispatchQueue.main.async {
-                  model.send(newMessage, chat: model.chats[person]!)
+                  model.nearby.send(newMessage, chat: model.nearby.chats[person]!)
                   newMessage = ""
                 }
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                  if let last = model.chats[person]!.messages.last {
+                  if let last = model.nearby.chats[person]!.messages.last {
                     print("Scrolling to last!")
                     withAnimation(.spring()) {
                       scrollView.scrollTo(last.id)

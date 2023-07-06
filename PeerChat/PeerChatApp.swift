@@ -15,7 +15,6 @@ struct PeerChatApp: App {
     WindowGroup {
       ContentView()
         .environmentObject(model)
-
     }
   }
 }

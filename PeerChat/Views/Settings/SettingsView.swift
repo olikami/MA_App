@@ -14,7 +14,7 @@ struct SettingsView: View {
   @FocusState private var nameIsFocused: Bool
 
   private var isNameChanged: Bool {
-    name != model.myPerson.name
+    name != model.person.name
   }
 
   var body: some View {
@@ -27,7 +27,7 @@ struct SettingsView: View {
               text: $name
             ).focused($nameIsFocused)
             Button {
-              model.setName(newName: name)
+              model.person.setName(newName: name)
               nameIsFocused = false
             } label: {
               Image(systemName: "checkmark.circle.fill")
@@ -42,7 +42,7 @@ struct SettingsView: View {
         }
       }
     }.onAppear {
-      self.name = model.myPerson.name
+      self.name = model.person.name
     }
   }
 }

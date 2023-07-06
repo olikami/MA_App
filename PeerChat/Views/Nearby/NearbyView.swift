@@ -14,10 +14,10 @@ struct NearbyView: View {
     NavigationView {
       List {
         Section("Chats") {
-          if model.chats.isEmpty {
+          if model.nearby.chats.isEmpty {
             Text("No Chats")
           } else {
-            ForEach(Array(model.chats), id: \.value.id) { id, chat in
+            ForEach(Array(model.nearby.chats), id: \.value.id) { id, chat in
               NavigationLink {
                 ChatView(person: id)
                   .navigationTitle(chat.person.name)
@@ -28,10 +28,10 @@ struct NearbyView: View {
           }
         }
         Section("Near-By Peers") {
-          if model.connectedPeers.isEmpty {
+          if model.nearby.connectedPeers.isEmpty {
             Text("No Peers")
           } else {
-            ForEach(model.connectedPeers, id: \.hash) { peer in
+            ForEach(model.nearby.connectedPeers, id: \.hash) { peer in
               Text(peer.displayName)
             }
           }
