@@ -57,15 +57,28 @@ class CertificateSigningRequest(models.Model):
             return None
 
     def __str__(self):
-        return f"CSR from {self.user} on {self.created.isoformat()}"
+        return f"CSR from {self.user} for {self.common_name()} on {self.created.isoformat()}"
 
 
 class Certificate(models.Model):
     csr = models.OneToOneField(
-        "CertificateSigningRequest", models.CASCADE, related_name="cert", primary_key=True
+        "CertificateSigningRequest",
+        models.CASCADE,
+        related_name="cert",
+        primary_key=True,
+        editable=False,
     )
     created = models.DateTimeField(auto_now_add=True, editable=False)
 
-    user = models.ForeignKey("ApplicationUser", on_delete=models.CASCADE)
+    user = models.ForeignKey(
+        "ApplicationUser", on_delete=models.CASCADE, editable=False
+    )
 
-    certificate_string = models.TextField()
+    certificate_string = models.TextField(editable=False)
+
+    def subject(self):
+        cert = x509.load_pem_x509_certificate(self.certificate_string.encode())
+        return cert.subject.rfc4514_string()
+
+    def __str__(self):
+        return self.subject()

@@ -22,4 +22,5 @@ class CertificateSigningRequestAdmin(admin.ModelAdmin):
 
 @admin.register(Certificate)
 class CertificateAdmin(admin.ModelAdmin):
-    list_display = ["user", "created"]
+    list_display = ["user", "created", "subject"]
+    readonly_fields = ["certificate_string", "subject", "csr", "user", "created"]
