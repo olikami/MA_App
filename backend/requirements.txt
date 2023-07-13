@@ -8,8 +8,12 @@ asgiref==3.7.2
     # via django
 black==23.7.0
     # via -r requirements.in
+cffi==1.15.1
+    # via cryptography
 click==8.1.5
     # via black
+cryptography==41.0.2
+    # via -r requirements.in
 django==4.2.3
     # via
     #   -r requirements.in
@@ -27,6 +31,8 @@ pathspec==0.11.1
     # via black
 platformdirs==3.8.1
     # via black
+pycparser==2.21
+    # via cffi
 pytz==2023.3
     # via djangorestframework
 sqlparse==0.4.4

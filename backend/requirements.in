@@ -1,5 +1,12 @@
+# Django
 django
+
+# DRF
 djangorestframework
 django-filter
 
+# Packages
+cryptography
+
+# DevTools
 black
