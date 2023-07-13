@@ -8,5 +8,6 @@ class ApplicationUserViewSet(viewsets.ModelViewSet):
     """
     A viewset for viewing and editing user instances.
     """
+
     serializer_class = ApplicationUserSerializer
     queryset = ApplicationUser.objects.all()
