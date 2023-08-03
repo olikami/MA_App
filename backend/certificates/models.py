@@ -4,7 +4,7 @@ from cryptography import x509
 from django.db import models
 from cryptography.x509.oid import NameOID
 
-from lib.certificatesigningrequeststatus import CertificateSigningRequestStatuses
+from lib.certificatesigningrequeststatus import CertificateSigningRequestStatus
 from lib.uuid import short_uuid
 
 
@@ -38,7 +38,7 @@ class CertificateSigningRequest(models.Model):
     csr_string = models.TextField()
 
     status = models.IntegerField(
-        choices=CertificateSigningRequestStatuses.choices, default=0
+        choices=CertificateSigningRequestStatus.choices, default=0
     )
 
     def csr(self):

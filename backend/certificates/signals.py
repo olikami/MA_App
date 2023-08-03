@@ -8,14 +8,14 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 from certificates.models import CertificateSigningRequest, Certificate
-from lib.certificatesigningrequeststatus import CertificateSigningRequestStatuses
+from lib.certificatesigningrequeststatus import CertificateSigningRequestStatus
 
 
 @receiver(post_save, sender=CertificateSigningRequest)
 def create_certificate(sender, instance, **kwargs):
     if (
         not instance.certificate()
-        and instance.status == CertificateSigningRequestStatuses.APPROVED
+        and instance.status == CertificateSigningRequestStatus.APPROVED
     ):
         # CSR doesn't have a certificate yet and is approved, therefore create certificate
 
