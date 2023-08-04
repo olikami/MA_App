@@ -1,6 +1,10 @@
 from django.contrib import admin
 
-from identity.models import ApplicationUser, CertificateSigningRequest, Certificate
+from identity.models import (
+    ApplicationUser,
+    CertificateSigningRequest,
+    EndUserCertificate,
+)
 
 
 @admin.register(ApplicationUser)
@@ -20,7 +24,7 @@ class CertificateSigningRequestAdmin(admin.ModelAdmin):
     readonly_fields = ["common_name"]
 
 
-@admin.register(Certificate)
+@admin.register(EndUserCertificate)
 class CertificateAdmin(admin.ModelAdmin):
     list_display = ["user", "created", "subject"]
     readonly_fields = ["certificate_string", "subject", "csr", "user", "created"]

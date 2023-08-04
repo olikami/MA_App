@@ -65,7 +65,7 @@ class CertificateSigningRequest(models.Model):
         return f"CSR from {self.user} for {self.common_name()} on {self.created.isoformat()}"
 
 
-class Certificate(models.Model):
+class EndUserCertificate(models.Model):
     csr = models.OneToOneField(
         "CertificateSigningRequest",
         models.CASCADE,

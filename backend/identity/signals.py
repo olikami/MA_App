@@ -7,7 +7,7 @@ from cryptography.hazmat.primitives._serialization import Encoding
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
-from identity.models import CertificateSigningRequest, Certificate
+from identity.models import CertificateSigningRequest, EndUserCertificate
 from lib.certificatesigningrequeststatus import CertificateSigningRequestStatus
 
 
@@ -61,7 +61,7 @@ def create_certificate(sender, instance, **kwargs):
             + ca_cert.public_bytes(Encoding.PEM).decode()
         )
 
-        Certificate.objects.create(
+        EndUserCertificate.objects.create(
             csr=instance,
             user=instance.user,
             certificate_string=chain,

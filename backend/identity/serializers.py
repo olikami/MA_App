@@ -1,6 +1,10 @@
 from rest_framework import serializers
 
-from identity.models import ApplicationUser, CertificateSigningRequest, Certificate
+from identity.models import (
+    ApplicationUser,
+    CertificateSigningRequest,
+    EndUserCertificate,
+)
 
 
 class ApplicationUserSerializer(serializers.HyperlinkedModelSerializer):
@@ -26,7 +30,7 @@ class CertificateSerializer(serializers.HyperlinkedModelSerializer):
     )
 
     class Meta:
-        model = Certificate
+        model = EndUserCertificate
         fields = [
             "url",
             "csr",
