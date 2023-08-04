@@ -8,20 +8,28 @@ from certificates.serializers import (
 )
 
 
-class ApplicationUserViewSet(viewsets.ModelViewSet):
+class CreateRetrieveViewSet(
+    mixins.CreateModelMixin,
+    mixins.RetrieveModelMixin,
+    viewsets.GenericViewSet,
+):
     """
-    A viewset for viewing and editing user instances.
+    A viewset the only allows to create and retrieve the model
     """
 
+    pass
+
+
+class ApplicationUserViewSet(CreateRetrieveViewSet):
     serializer_class = ApplicationUserSerializer
     queryset = ApplicationUser.objects.all()
 
 
-class CertificateSigningRequestViewSet(viewsets.ModelViewSet):
+class CertificateSigningRequestViewSet(CreateRetrieveViewSet):
     serializer_class = CertificateSigningRequestSerializer
     queryset = CertificateSigningRequest.objects.all()
 
 
-class CertificateViewSet(viewsets.ModelViewSet):
+class CertificateViewSet(CreateRetrieveViewSet):
     serializer_class = CertificateSerializer
     queryset = Certificate.objects.all()
