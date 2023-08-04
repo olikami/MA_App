@@ -7,7 +7,7 @@ from cryptography.hazmat.primitives._serialization import Encoding
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
-from certificates.models import CertificateSigningRequest, Certificate
+from identity.models import CertificateSigningRequest, Certificate
 from lib.certificatesigningrequeststatus import CertificateSigningRequestStatus
 
 

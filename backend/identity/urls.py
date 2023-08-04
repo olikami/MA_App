@@ -1,7 +1,7 @@
 from django.urls import path, include
 from rest_framework import routers
 
-from certificates.views import (
+from identity.views import (
     ApplicationUserViewSet,
     CertificateSigningRequestViewSet,
     CertificateViewSet,

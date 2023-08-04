@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from certificates.models import ApplicationUser, CertificateSigningRequest, Certificate
+from identity.models import ApplicationUser, CertificateSigningRequest, Certificate
 
 
 class ApplicationUserSerializer(serializers.HyperlinkedModelSerializer):

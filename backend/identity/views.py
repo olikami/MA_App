@@ -1,7 +1,7 @@
 from rest_framework import viewsets, mixins
 
-from certificates.models import ApplicationUser, CertificateSigningRequest, Certificate
-from certificates.serializers import (
+from identity.models import ApplicationUser, CertificateSigningRequest, Certificate
+from identity.serializers import (
     ApplicationUserSerializer,
     CertificateSigningRequestSerializer,
     CertificateSerializer,

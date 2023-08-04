@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from certificates.models import ApplicationUser, CertificateSigningRequest, Certificate
+from identity.models import ApplicationUser, CertificateSigningRequest, Certificate
 
 
 @admin.register(ApplicationUser)
