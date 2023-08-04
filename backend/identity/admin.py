@@ -4,6 +4,7 @@ from identity.models import (
     ApplicationUser,
     CertificateSigningRequest,
     EndUserCertificate,
+    IntermediateCertificate,
 )
 
 
@@ -15,6 +16,13 @@ class ApplicationUserAdmin(admin.ModelAdmin):
         "last_name",
         "short_uuid",
     ]
+
+
+@admin.register(IntermediateCertificate)
+class IntermediateCertificateAdmin(admin.ModelAdmin):
+    list_display = ["id", "active", "type", "common_name"]
+    list_filter = ["active", "type"]
+    readonly_fields = ["common_name"]
 
 
 @admin.register(CertificateSigningRequest)

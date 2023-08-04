@@ -18,9 +18,22 @@ class ApplicationUserSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class CertificateSigningRequestSerializer(serializers.HyperlinkedModelSerializer):
+    certificate = serializers.HyperlinkedRelatedField(
+        view_name="endusercertificate-detail", read_only=True
+    )
+
     class Meta:
         model = CertificateSigningRequest
-        fields = ["uuid", "created", "user", "common_name", "csr_string", "status"]
+        fields = [
+            "uuid",
+            "url",
+            "created",
+            "user",
+            "common_name",
+            "csr_string",
+            "status",
+            "certificate",
+        ]
         read_only_fields = ("status",)
 
 
