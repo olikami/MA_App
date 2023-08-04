@@ -1,10 +1,16 @@
 from django.urls import path, include
 from rest_framework import routers
 
-from certificates.views import ApplicationUserViewSet
+from certificates.views import (
+    ApplicationUserViewSet,
+    CertificateSigningRequestViewSet,
+    CertificateViewSet,
+)
 
 router = routers.DefaultRouter()
 router.register(r"application_user", ApplicationUserViewSet)
+router.register(r"csr", CertificateSigningRequestViewSet)
+router.register(r"certificate", CertificateViewSet)
 
 
 urlpatterns = [

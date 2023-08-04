@@ -1,7 +1,11 @@
-from rest_framework import viewsets
+from rest_framework import viewsets, mixins
 
-from certificates.models import ApplicationUser
-from certificates.serializers import ApplicationUserSerializer
+from certificates.models import ApplicationUser, CertificateSigningRequest, Certificate
+from certificates.serializers import (
+    ApplicationUserSerializer,
+    CertificateSigningRequestSerializer,
+    CertificateSerializer,
+)
 
 
 class ApplicationUserViewSet(viewsets.ModelViewSet):
@@ -11,3 +15,13 @@ class ApplicationUserViewSet(viewsets.ModelViewSet):
 
     serializer_class = ApplicationUserSerializer
     queryset = ApplicationUser.objects.all()
+
+
+class CertificateSigningRequestViewSet(viewsets.ModelViewSet):
+    serializer_class = CertificateSigningRequestSerializer
+    queryset = CertificateSigningRequest.objects.all()
+
+
+class CertificateViewSet(viewsets.ModelViewSet):
+    serializer_class = CertificateSerializer
+    queryset = Certificate.objects.all()
