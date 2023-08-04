@@ -25,7 +25,12 @@ class ApplicationUser(models.Model):
         return self.certificatesigningrequest_set.order_by("-created")
 
     def latest_certificate_request(self):
-        return self.certificate_requests().first()
+        return self.certificate_requests.first()
+
+    def latest_certificate(self):
+        if self.certificate_set.exists():
+            return self.certificate_set.order_by("-created").first()
+        return None
 
 
 class CertificateSigningRequest(models.Model):
