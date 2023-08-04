@@ -1,12 +1,12 @@
 # Django
-django
+django~=4.2
 
 # DRF
-djangorestframework
+djangorestframework~=3.14
 django-filter
 
 # Packages
-cryptography
+cryptography~=41.0
 
 # DevTools
 black
