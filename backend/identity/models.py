@@ -6,7 +6,7 @@ from django.db import models
 from cryptography.x509.oid import NameOID
 
 from lib.certificatesigningrequeststatus import CertificateSigningRequestStatus
-from lib.CertificateTypes import CertificateType
+from lib.certificatetypes import CertificateType
 from lib.uuid import short_uuid
 
 
