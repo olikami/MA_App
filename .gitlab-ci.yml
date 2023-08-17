@@ -6,7 +6,8 @@ deploy_production:
   only:
     - main
   script:
-    - cd backend
+    - cp -r ~/backend
+    - cd ~/backend
     - python3 -m venv venv
     - source venv/bin/activate 
     - pip install --upgrade pip

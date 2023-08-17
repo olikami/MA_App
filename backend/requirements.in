@@ -5,6 +5,9 @@ django~=4.2
 djangorestframework~=3.14
 django-filter
 
+# Gunicorn
+gunicorn
+
 # Packages
 cryptography~=41.0
 
