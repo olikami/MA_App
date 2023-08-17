@@ -39,17 +39,19 @@ class Identity: ObservableObject {
     }
 
     if let cfData = SecKeyCopyExternalRepresentation(key, nil) as Data? {
-      let hash = SHA256(data: cfData)
-      return hash?.map { String(format: "%02hhx", $0) }.joined()
+      let hash = SHA1(data: cfData)
+      let fingerprint = hash?.map { String(format: "%02hhX", $0) }.joined()
+
+      return fingerprint?.chunked(by: 4).joined(separator: " ")
     }
 
     return nil
   }
 
-  private func SHA256(data: Data) -> Data? {
-    var hash = [UInt8](repeating: 0, count: Int(CC_SHA256_DIGEST_LENGTH))
+  private func SHA1(data: Data) -> Data? {
+    var hash = [UInt8](repeating: 0, count: Int(CC_SHA1_DIGEST_LENGTH))
     data.withUnsafeBytes {
-      _ = CC_SHA256($0.baseAddress, CC_LONG(data.count), &hash)
+      _ = CC_SHA1($0.baseAddress, CC_LONG(data.count), &hash)
     }
     return Data(hash)
   }

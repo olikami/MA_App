@@ -20,3 +20,13 @@ extension String {
 
   var emojiScalars: [UnicodeScalar] { filter { $0.isEmoji }.flatMap { $0.unicodeScalars } }
 }
+
+extension String {
+  func chunked(by chunkSize: Int) -> [String] {
+    stride(from: 0, to: self.count, by: chunkSize).map {
+      let start = self.index(self.startIndex, offsetBy: $0)
+      let end = self.index(start, offsetBy: chunkSize, limitedBy: self.endIndex) ?? self.endIndex
+      return String(self[start..<end])
+    }
+  }
+}
