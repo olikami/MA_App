@@ -18,6 +18,10 @@ class Model: ObservableObject {
 
   }
 
+  func createPerson(name: String) {
+    self.person = Person(name, id: UUID())
+  }
+
   func setNearby(person: Person) {
     self.nearby = Nearby(person: person)
   }
