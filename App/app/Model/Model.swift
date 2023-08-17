@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 import UIKit
 
 class Model: ObservableObject {
@@ -19,5 +20,18 @@ class Model: ObservableObject {
 
   func setNearby(person: Person) {
     self.nearby = Nearby(person: person)
+  }
+}
+
+extension Model {
+  var isPersonUnset: Binding<Bool> {
+    Binding<Bool>(
+      get: { self.person == nil },
+      set: { newValue in
+        if !newValue {
+          self.person = nil
+        }
+      }
+    )
   }
 }

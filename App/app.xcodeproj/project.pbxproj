@@ -24,6 +24,7 @@
 		4FA424442A8E3AF700AFC23A /* PersonInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA424432A8E3AF700AFC23A /* PersonInfoView.swift */; };
 		4FA424462A8E3B1900AFC23A /* TextFieldStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA424452A8E3B1900AFC23A /* TextFieldStyles.swift */; };
 		4FA424492A8E3EB300AFC23A /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA424482A8E3EB300AFC23A /* SettingsView.swift */; };
+		4FA4244C2A8E425000AFC23A /* SetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA4244B2A8E425000AFC23A /* SetupView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +46,7 @@
 		4FA424432A8E3AF700AFC23A /* PersonInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonInfoView.swift; sourceTree = "<group>"; };
 		4FA424452A8E3B1900AFC23A /* TextFieldStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldStyles.swift; sourceTree = "<group>"; };
 		4FA424482A8E3EB300AFC23A /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		4FA4244B2A8E425000AFC23A /* SetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +119,7 @@
 		4FA424242A8E37E700AFC23A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				4FA4244A2A8E424300AFC23A /* Setup */,
 				4FA424472A8E3E9F00AFC23A /* Settings */,
 				4FA424422A8E399F00AFC23A /* PersonInfo */,
 				4FA4243F2A8E395F00AFC23A /* Official */,
@@ -184,6 +187,14 @@
 				4FA424482A8E3EB300AFC23A /* SettingsView.swift */,
 			);
 			path = Settings;
+			sourceTree = "<group>";
+		};
+		4FA4244A2A8E424300AFC23A /* Setup */ = {
+			isa = PBXGroup;
+			children = (
+				4FA4244B2A8E425000AFC23A /* SetupView.swift */,
+			);
+			path = Setup;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -262,6 +273,7 @@
 				4FA424322A8E38B600AFC23A /* Model.swift in Sources */,
 				4FA4242E2A8E387E00AFC23A /* Character+Exts.swift in Sources */,
 				4FA4242C2A8E385400AFC23A /* ChatMessageRow.swift in Sources */,
+				4FA4244C2A8E425000AFC23A /* SetupView.swift in Sources */,
 				4FA424302A8E389000AFC23A /* String+Exts.swift in Sources */,
 				4FA424262A8E380F00AFC23A /* ContentView.swift in Sources */,
 				4FA424462A8E3B1900AFC23A /* TextFieldStyles.swift in Sources */,
