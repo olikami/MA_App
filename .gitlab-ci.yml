@@ -18,7 +18,8 @@ deploy_production:
     - pip install pip-tools
     - pip-sync
     - python manage.py migrate
-    - python manage.py collectstatic --noinput 
+    - python manage.py collectstatic --noinput
+    - sudo systemctl restart backendapp
   tags:
     - linux
     - prod
