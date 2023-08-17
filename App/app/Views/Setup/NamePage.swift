@@ -1,7 +1,7 @@
 import Combine
 import SwiftUI
 
-struct PageTwo: View {
+struct NamePage: View {
   let nextPage: () -> Void
 
   @State private var fullName: String = ""

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct PageOne: View {
+struct WelcomePage: View {
   let nextPage: () -> Void
   var body: some View {
     VStack(spacing: 20) {

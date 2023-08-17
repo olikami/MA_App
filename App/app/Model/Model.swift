@@ -13,9 +13,11 @@ class Model: ObservableObject {
 
   @Published var person: Person?
   @Published var nearby: Nearby?
+  @Published var identity: Identity?
+  @Published var setupDone: Bool
 
   init() {
-
+    self.setupDone = false
   }
 
   func createPerson(name: String) {
@@ -25,12 +27,20 @@ class Model: ObservableObject {
   func setNearby(person: Person) {
     self.nearby = Nearby(person: person)
   }
+
+  func createIdentity() {
+    self.identity = Identity()
+  }
+
+  func generateKey() {
+    self.identity?.generatePrivateKey()
+  }
 }
 
 extension Model {
   var needsSetup: Binding<Bool> {
     Binding<Bool>(
-      get: { self.person == nil },
+      get: { self.setupDone == false },
       set: { newValue in
         if !newValue {
           self.person = nil

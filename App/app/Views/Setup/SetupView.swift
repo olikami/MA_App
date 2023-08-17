@@ -12,14 +12,16 @@ struct SetupView: View {
   private var maxPages = 3
 
   func nextPage() {
-    withAnimation { selectedPage += 1 }
+    if (selectedPage + 1) < maxPages {
+      withAnimation { selectedPage += 1 }
+    }
   }
 
   var body: some View {
     TabView(selection: $selectedPage) {
-      PageOne(nextPage: nextPage).tag(1)
-      PageTwo(nextPage: nextPage).tag(2)
-      PageThree().tag(3)
+      WelcomePage(nextPage: nextPage).tag(1)
+      NamePage(nextPage: nextPage).tag(2)
+      ConfirmName(nextPage: nextPage).tag(3)
     }
     .tabViewStyle(PageTabViewStyle())
     .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
