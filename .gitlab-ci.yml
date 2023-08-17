@@ -14,7 +14,7 @@ deploy_production:
     - pip install pip-tools
     - pip-sync
     - python manage.py migrate
-    - python manage.py collectstatic
+    - python manage.py collectstatic --noinput 
   tags:
     - linux
     - prod
