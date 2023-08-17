@@ -24,7 +24,7 @@ class Model: ObservableObject {
 }
 
 extension Model {
-  var isPersonUnset: Binding<Bool> {
+  var needsSetup: Binding<Bool> {
     Binding<Bool>(
       get: { self.person == nil },
       set: { newValue in

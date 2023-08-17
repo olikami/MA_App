@@ -28,7 +28,7 @@ struct ContentView: View {
       SettingsView().tabItem {
         Label("Settings", systemImage: "gear")
       }
-    }.sheet(isPresented: model.isPersonUnset) {
+    }.sheet(isPresented: model.needsSetup) {
       SetupView()
     }
   }
