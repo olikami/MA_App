@@ -13,7 +13,7 @@ struct ContentView: View {
 
   var body: some View {
     TabView {
-      NearbyView().tabItem {
+      AroundYouView().tabItem {
         Label("Around You", systemImage: "location.circle")
       }
       CommunityView().tabItem {
@@ -24,6 +24,9 @@ struct ContentView: View {
       }
       PersonInfoView().tabItem {
         Label("You", systemImage: "person.circle.fill")
+      }
+      SettingsView().tabItem {
+        Label("Settings", systemImage: "gear")
       }
     }
   }

@@ -15,9 +15,6 @@ struct PeerChatApp: App {
     WindowGroup {
       ContentView()
         .environmentObject(model)
-        .onAppear {
-          model.setNearby(person: model.person)
-        }
     }
   }
 }

@@ -11,7 +11,11 @@ struct CommunityView: View {
   @EnvironmentObject private var model: Model
 
   var body: some View {
-    Text("Hello, \(model.person.name)!")
+    if let person = model.person {
+      Text("Hello, \(person.name)!")
+    } else {
+      EmptyView()
+    }
   }
 }
 

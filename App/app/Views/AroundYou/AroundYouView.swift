@@ -7,12 +7,13 @@
 
 import SwiftUI
 
-struct NearbyView: View {
+struct AroundYouView: View {
   @EnvironmentObject private var model: Model
 
   var body: some View {
-    NavigationView {
-      if let nearby = model.nearby {
+    if let nearby = model.nearby {
+      NavigationView {
+
         List {
           Section("Chats") {
             if nearby.chats.isEmpty {
@@ -42,6 +43,8 @@ struct NearbyView: View {
           }
         }
       }
+    } else {
+      EmptyView()
     }
   }
 }
@@ -51,6 +54,6 @@ struct NearbyView_Previews: PreviewProvider {
   static var model = Model()
 
   static var previews: some View {
-    NearbyView().environmentObject(model)
+    AroundYouView().environmentObject(model)
   }
 }
