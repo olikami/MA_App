@@ -6,7 +6,7 @@ deploy_production:
   only:
     - main
   script:
-    - find ~/backend ! -name 'db.sqlite3' ! -name '~/backend' -exec rm -rf {} +
+    - find ~/backend ! -name 'db.sqlite3' ! -name '~/backend' -exec rm -rf {} + || 0
     - cp -r backend ~/backend
     - cd ~/backend
     - python3 -m venv venv
