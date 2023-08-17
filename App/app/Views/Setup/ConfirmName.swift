@@ -11,12 +11,19 @@ struct ConfirmName: View {
   let nextPage: () -> Void
   @EnvironmentObject private var model: Model
 
+  var firstName: String {
+    if let person = model.person {
+      return person.name.split(separator: " ").first.map(String.init) ?? ""
+    }
+    return ""
+  }
+
   var body: some View {
     if let person = model.person {
       VStack(spacing: 20) {
         // Display the person's name as a title.
 
-        Text("Hi, \(person.name)")
+        Text("Hi, \(firstName)")
           .font(.largeTitle)
           .fontWeight(.bold)
 

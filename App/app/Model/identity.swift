@@ -54,4 +54,9 @@ class Identity: ObservableObject {
     return Data(hash)
   }
 
+  func hasKey() -> Bool {
+    if self.privateKey != nil { return true }
+    return false
+  }
+
 }

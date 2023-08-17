@@ -35,6 +35,10 @@ class Model: ObservableObject {
   func generateKey() {
     self.identity?.generatePrivateKey()
   }
+
+  func setupIsDone() {
+    self.setupDone = true
+  }
 }
 
 extension Model {

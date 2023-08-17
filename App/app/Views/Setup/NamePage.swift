@@ -8,8 +8,8 @@ struct NamePage: View {
   @EnvironmentObject var model: Model
   @State private var showInvalidNameMessage: Bool = false
 
-  // Timer-related property set to 3 seconds
-  let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+  // Timer-related property set to 5 seconds
+  let timer = Timer.publish(every: 5, on: .main, in: .common).autoconnect()
 
   var isNameValid: Bool {
     let trimmedName = fullName.trimmingCharacters(in: .whitespacesAndNewlines)
