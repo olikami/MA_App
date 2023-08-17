@@ -22,8 +22,8 @@ struct ContentView: View {
       OfficialView().tabItem {
         Label("Official", systemImage: "info.circle.fill")
       }
-      SettingsView().tabItem {
-        Label("Settings", systemImage: "gearshape.fill")
+      PersonInfoView().tabItem {
+        Label("You", systemImage: "person.circle.fill")
       }
     }
   }
