@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct GenerateKeyPage: View {
+  let nextPage: () -> Void
   @EnvironmentObject var model: Model
 
   var body: some View {
@@ -24,7 +25,7 @@ struct GenerateKeyPage: View {
           .multilineTextAlignment(.center)
           .padding()
       } else {
-        Text("Your key has been generated.")
+        Text("Your key has been generated. Below you can see the fingerprint of your public key:")
           .font(.body)
           .multilineTextAlignment(.center)
           .padding()
@@ -50,13 +51,12 @@ struct GenerateKeyPage: View {
         Text(fingerprint)
           .font(.body)
           .foregroundColor(.gray)
-          .padding(.top, 10)
       }
 
       // Conditionally display the Next button
       if model.identity?.hasKey() ?? false {
         Button(action: {
-          model.setupIsDone()
+          nextPage()
         }) {
           Text("Next")
             .font(.headline)
@@ -67,6 +67,6 @@ struct GenerateKeyPage: View {
         }
       }
     }
-    .padding(.horizontal, 20)
+    .padding(.horizontal, 50)
   }
 }

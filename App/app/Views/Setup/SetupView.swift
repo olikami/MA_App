@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SetupView: View {
   @State private var selectedPage = 1
-  private var maxPages = 4
+  private var maxPages = 6
 
   func nextPage() {
     if (selectedPage) < maxPages {
@@ -22,7 +22,9 @@ struct SetupView: View {
       WelcomePage(nextPage: nextPage).tag(1)
       NamePage(nextPage: nextPage).tag(2)
       ConfirmName(nextPage: nextPage).tag(3)
-      GenerateKeyPage().tag(4)
+      GenerateKeyPage(nextPage: nextPage).tag(4)
+      GenerateCSRPage(nextPage: nextPage).tag(5)
+      GetCertificatePage().tag(6)
     }
     .tabViewStyle(PageTabViewStyle())
     .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))

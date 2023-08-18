@@ -30,6 +30,8 @@
 		4FA424462A8E3B1900AFC23A /* TextFieldStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA424452A8E3B1900AFC23A /* TextFieldStyles.swift */; };
 		4FA424492A8E3EB300AFC23A /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA424482A8E3EB300AFC23A /* SettingsView.swift */; };
 		4FA4244C2A8E425000AFC23A /* SetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA4244B2A8E425000AFC23A /* SetupView.swift */; };
+		4FC5F6372A8F8891002A6001 /* GenerateCSRPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC5F6362A8F8891002A6001 /* GenerateCSRPage.swift */; };
+		4FC5F6392A8F9857002A6001 /* GetCertificatePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC5F6382A8F9857002A6001 /* GetCertificatePage.swift */; };
 		4FC74B422A8EB6FA00750FAA /* GenerateKeyPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC74B412A8EB6FA00750FAA /* GenerateKeyPage.swift */; };
 /* End PBXBuildFile section */
 
@@ -57,6 +59,8 @@
 		4FA424452A8E3B1900AFC23A /* TextFieldStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldStyles.swift; sourceTree = "<group>"; };
 		4FA424482A8E3EB300AFC23A /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		4FA4244B2A8E425000AFC23A /* SetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupView.swift; sourceTree = "<group>"; };
+		4FC5F6362A8F8891002A6001 /* GenerateCSRPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateCSRPage.swift; sourceTree = "<group>"; };
+		4FC5F6382A8F9857002A6001 /* GetCertificatePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetCertificatePage.swift; sourceTree = "<group>"; };
 		4FC74B412A8EB6FA00750FAA /* GenerateKeyPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateKeyPage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -210,6 +214,8 @@
 				4F1C52742A8EA08100EFBCCE /* NamePage.swift */,
 				4F1C52762A8EA70500EFBCCE /* ConfirmName.swift */,
 				4FC74B412A8EB6FA00750FAA /* GenerateKeyPage.swift */,
+				4FC5F6362A8F8891002A6001 /* GenerateCSRPage.swift */,
+				4FC5F6382A8F9857002A6001 /* GetCertificatePage.swift */,
 			);
 			path = Setup;
 			sourceTree = "<group>";
@@ -296,12 +302,14 @@
 				4F1C52732A8E9C1D00EFBCCE /* WelcomePage.swift in Sources */,
 				4FA424342A8E38C500AFC23A /* Nearby.swift in Sources */,
 				4FA424322A8E38B600AFC23A /* Model.swift in Sources */,
+				4FC5F6372A8F8891002A6001 /* GenerateCSRPage.swift in Sources */,
 				4FA4242E2A8E387E00AFC23A /* Character+Exts.swift in Sources */,
 				4FA4242C2A8E385400AFC23A /* ChatMessageRow.swift in Sources */,
 				4FA4244C2A8E425000AFC23A /* SetupView.swift in Sources */,
 				4FA424302A8E389000AFC23A /* String+Exts.swift in Sources */,
 				4FA424262A8E380F00AFC23A /* ContentView.swift in Sources */,
 				4FA424462A8E3B1900AFC23A /* TextFieldStyles.swift in Sources */,
+				4FC5F6392A8F9857002A6001 /* GetCertificatePage.swift in Sources */,
 				4F0644D42A8EB1500052E19A /* Identity.swift in Sources */,
 				4FA424362A8E38DE00AFC23A /* Person.swift in Sources */,
 				4FA424292A8E383700AFC23A /* ChatView.swift in Sources */,
@@ -454,6 +462,9 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = contact.oli.mt.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -483,6 +494,9 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = contact.oli.mt.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

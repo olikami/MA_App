@@ -11,51 +11,130 @@ import Foundation
 import Security
 
 class Identity: ObservableObject {
-  private var privateKey: SecKey?
+  @Published var csr: String?
+
+  let tagPrivate = "contact.oli.mt.app.private.ec"
+  let tagPublic = "contact.oli.mt.app.public.ec"
+
+  let algorithm = KeyAlgorithm.rsa(signatureType: .sha512)
 
   func generatePrivateKey() {
-    let keyAttributes: [String: Any] = [
-      kSecAttrKeyType as String: kSecAttrKeyTypeRSA,
-      kSecAttrKeySizeInBits as String: 4096,
-      kSecPrivateKeyAttrs as String: [
-        kSecAttrIsPermanent as String: false
-      ],
+    let queryDeletePublic: [String: Any] = [
+      String(kSecClass): kSecClassKey,
+      String(kSecAttrKeyType): algorithm.secKeyAttrType,
+      String(kSecAttrApplicationTag): tagPublic.data(using: .utf8)!,
+    ]
+    let queryDeletePrivate: [String: Any] = [
+      String(kSecClass): kSecClassKey,
+      String(kSecAttrKeyType): algorithm.secKeyAttrType,
+      String(kSecAttrApplicationTag): tagPrivate.data(using: .utf8)!,
+    ]
+
+    SecItemDelete(queryDeletePublic as CFDictionary)
+    SecItemDelete(queryDeletePrivate as CFDictionary)
+
+    let publicKeyParameters: [String: Any] = [
+      String(kSecAttrIsPermanent): true,
+      String(kSecAttrAccessible): kSecAttrAccessibleAfterFirstUnlock,
+      String(kSecAttrApplicationTag): tagPublic.data(using: .utf8)!,
+    ]
+
+    let privateKeyParameters: [String: Any] = [
+      String(kSecAttrIsPermanent): true,
+      String(kSecAttrAccessible): kSecAttrAccessibleAfterFirstUnlock,
+      String(kSecAttrApplicationTag): tagPrivate.data(using: .utf8)!,
+    ]
+
+    let parameters: [String: Any] = [
+      String(kSecAttrKeyType): algorithm.secKeyAttrType,
+      String(kSecAttrKeySizeInBits): 2048,
+      String(kSecReturnRef): true,
+      String(kSecPublicKeyAttrs): publicKeyParameters,
+      String(kSecPrivateKeyAttrs): privateKeyParameters,
     ]
 
     let error: UnsafeMutablePointer<Unmanaged<CFError>?>? = nil
-    privateKey = SecKeyCreateRandomKey(keyAttributes as CFDictionary, error)
+    let privateKey = SecKeyCreateRandomKey(parameters as CFDictionary, error)
 
     if privateKey == nil {
-      if let actualError = error?.pointee {
-        print("Error generating key: \(actualError.takeRetainedValue())")
-      } else {
-        print("Unknown error generating key.")
-      }
+      print("Error creating keys occured: keys weren't created")
     }
   }
 
-  func getPublicKey() -> CFData? {
-    guard let key = privateKey else {
+  func getPrivateKey() -> SecKey? {
+    //Get generated public key
+    let query: [String: Any] = [
+      String(kSecClass): kSecClassKey,
+      String(kSecAttrKeyType): algorithm.secKeyAttrType,
+      String(kSecAttrApplicationTag): tagPrivate.data(using: .utf8)!,
+      String(kSecReturnRef): true,
+    ]
+
+    var privateKeyReturn: CFTypeRef?
+    let result = SecItemCopyMatching(query as CFDictionary, &privateKeyReturn)
+    if result != errSecSuccess {
+      print("Error getting privateKey fron keychain occured: \(result)")
+    }
+    let privateKey = privateKeyReturn as! SecKey?
+    return privateKey
+  }
+
+  func getPublicKey() -> SecKey? {
+    //Get generated public key
+    let query: [String: Any] = [
+      String(kSecClass): kSecClassKey,
+      String(kSecAttrKeyType): algorithm.secKeyAttrType,
+      String(kSecAttrApplicationTag): tagPublic.data(using: .utf8)!,
+      String(kSecReturnRef): true,
+    ]
+
+    var publicKeyReturn: CFTypeRef?
+    let result = SecItemCopyMatching(query as CFDictionary, &publicKeyReturn)
+    if result != errSecSuccess {
+      print("Error getting publicKey fron keychain occured: \(result)")
+    }
+    let publicKey = publicKeyReturn as! SecKey?
+    return publicKey
+  }
+
+  func getPublicKeyData() -> Data? {
+
+    //Ask keychain to provide the publicKey in bits
+    let query: [String: Any] = [
+      String(kSecClass): kSecClassKey,
+      String(kSecAttrKeyType): algorithm.secKeyAttrType,
+      String(kSecAttrApplicationTag): tagPublic.data(using: .utf8)!,
+      String(kSecReturnData): true,
+    ]
+
+    var tempPublicKeyBits: CFTypeRef?
+    var _ = SecItemCopyMatching(query as CFDictionary, &tempPublicKeyBits)
+
+    guard let keyBits = tempPublicKeyBits as? Data else {
       return nil
     }
-    return SecKeyCopyExternalRepresentation(key, nil)
+    return keyBits
   }
 
-  func generateCSR() -> String {
-    let csr = CertificateSigningRequest()  //CSR with no fields, will use defaults of an RSA key with sha512
-    let algorithm = KeyAlgorithm.ec(signatureType: .sha256)
-    let csr = CertificateSigningRequest(keyAlgorithm: algorithm)  //CSR with a specific key
+  func generateCSR(name: String) {
+    guard let privateKey = self.getPrivateKey() else { return }
+    guard let publicKey = self.getPublicKey() else { return }
+    guard let publicKeyData = self.getPublicKeyData() else { return }
     let csr = CertificateSigningRequest(
-      commonName: String?, organizationName: String?, organizationUnitName: String?,
-      countryName: String?, stateOrProvinceName: String?, localityName: String?,
-      emailAddress: String?, description: String?, keyAlgorithm: algorithm)  //Define any field you want in your CSR along with the key algorithm
+      commonName: name, keyAlgorithm: algorithm)
 
-    return csr.buildCSRAndReturnString(publicKeyBits, privateKey: privateKey, publicKey: publicKey)
+    let csrString = csr.buildCSRAndReturnString(
+      publicKeyData as Data,
+      privateKey: privateKey,
+      publicKey: publicKey
+    )
+
+    self.csr = csrString
   }
 
   func fingerprint() -> String? {
 
-    if let cfData = self.getPublicKey() as Data? {
+    if let cfData = self.getPublicKeyData() as Data? {
       let hash = SHA512(data: cfData)
       let fullFingerprint = hash?.map { String(format: "%02hhX", $0) }.joined()
 
@@ -75,7 +154,7 @@ class Identity: ObservableObject {
   }
 
   func hasKey() -> Bool {
-    if self.privateKey != nil { return true }
+    if self.getPrivateKey() != nil { return true }
     return false
   }
 
