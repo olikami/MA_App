@@ -19,7 +19,7 @@ struct ConfirmName: View {
   }
 
   var body: some View {
-    if let person = model.person {
+    if model.person != nil {
       VStack(spacing: 20) {
         // Display the person's name as a title.
 
