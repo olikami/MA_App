@@ -26,6 +26,9 @@ SECRET_KEY = "gdl1#@a0!u2(^q1zvzu5+8#0ugsy5m8i26f_5*gx+6)03g0c)32p3495rajhdsf019
 DEBUG = True
 
 ALLOWED_HOSTS = ["master-thesis.oli.fyi"]
+CORS_ORIGIN_WHITELIST = [
+    "https://master-thesis.oli.fyi",
+]
 
 
 # Application definition
