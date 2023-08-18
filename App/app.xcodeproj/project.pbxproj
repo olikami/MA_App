@@ -11,6 +11,7 @@
 		4F1C52732A8E9C1D00EFBCCE /* WelcomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1C52722A8E9C1D00EFBCCE /* WelcomePage.swift */; };
 		4F1C52752A8EA08100EFBCCE /* NamePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1C52742A8EA08100EFBCCE /* NamePage.swift */; };
 		4F1C52772A8EA70500EFBCCE /* ConfirmName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1C52762A8EA70500EFBCCE /* ConfirmName.swift */; };
+		4F3BB1E52A8F560400A6D56F /* CertificateSigningRequest in Frameworks */ = {isa = PBXBuildFile; productRef = 4F3BB1E42A8F560400A6D56F /* CertificateSigningRequest */; };
 		4FA424152A8E36C000AFC23A /* appApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA424142A8E36C000AFC23A /* appApp.swift */; };
 		4FA424192A8E36C100AFC23A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4FA424182A8E36C100AFC23A /* Assets.xcassets */; };
 		4FA4241C2A8E36C100AFC23A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4FA4241B2A8E36C100AFC23A /* Preview Assets.xcassets */; };
@@ -64,6 +65,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F3BB1E52A8F560400A6D56F /* CertificateSigningRequest in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -228,6 +230,9 @@
 			dependencies = (
 			);
 			name = app;
+			packageProductDependencies = (
+				4F3BB1E42A8F560400A6D56F /* CertificateSigningRequest */,
+			);
 			productName = app;
 			productReference = 4FA424112A8E36C000AFC23A /* app.app */;
 			productType = "com.apple.product-type.application";
@@ -256,6 +261,9 @@
 				Base,
 			);
 			mainGroup = 4FA424082A8E36C000AFC23A;
+			packageReferences = (
+				4F3BB1E32A8F560400A6D56F /* XCRemoteSwiftPackageReference "CertificateSigningRequest" */,
+			);
 			productRefGroup = 4FA424122A8E36C000AFC23A /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -503,6 +511,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		4F3BB1E32A8F560400A6D56F /* XCRemoteSwiftPackageReference "CertificateSigningRequest" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/cbaker6/CertificateSigningRequest.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		4F3BB1E42A8F560400A6D56F /* CertificateSigningRequest */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4F3BB1E32A8F560400A6D56F /* XCRemoteSwiftPackageReference "CertificateSigningRequest" */;
+			productName = CertificateSigningRequest;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 4FA424092A8E36C000AFC23A /* Project object */;
 }

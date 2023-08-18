@@ -5,6 +5,7 @@
 //  Created by Oliver Kamer on 17.08.23.
 //
 
+import CertificateSigningRequest
 import CommonCrypto
 import Foundation
 import Security
@@ -33,12 +34,28 @@ class Identity: ObservableObject {
     }
   }
 
-  func fingerprint() -> String? {
+  func getPublicKey() -> CFData? {
     guard let key = privateKey else {
       return nil
     }
+    return SecKeyCopyExternalRepresentation(key, nil)
+  }
 
-    if let cfData = SecKeyCopyExternalRepresentation(key, nil) as Data? {
+  func generateCSR() -> String {
+    let csr = CertificateSigningRequest()  //CSR with no fields, will use defaults of an RSA key with sha512
+    let algorithm = KeyAlgorithm.ec(signatureType: .sha256)
+    let csr = CertificateSigningRequest(keyAlgorithm: algorithm)  //CSR with a specific key
+    let csr = CertificateSigningRequest(
+      commonName: String?, organizationName: String?, organizationUnitName: String?,
+      countryName: String?, stateOrProvinceName: String?, localityName: String?,
+      emailAddress: String?, description: String?, keyAlgorithm: algorithm)  //Define any field you want in your CSR along with the key algorithm
+
+    return csr.buildCSRAndReturnString(publicKeyBits, privateKey: privateKey, publicKey: publicKey)
+  }
+
+  func fingerprint() -> String? {
+
+    if let cfData = self.getPublicKey() as Data? {
       let hash = SHA512(data: cfData)
       let fullFingerprint = hash?.map { String(format: "%02hhX", $0) }.joined()
 
