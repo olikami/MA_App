@@ -10,6 +10,7 @@ import SwiftUI
 struct GenerateKeyPage: View {
   let nextPage: () -> Void
   @EnvironmentObject var model: Model
+  @State private var isProcessing = false
 
   var body: some View {
     VStack(spacing: 20) {
@@ -32,18 +33,29 @@ struct GenerateKeyPage: View {
       }
 
       // Conditionally display the Generate Key button
-      if !(model.identity?.hasKey() ?? false) {
+      if !(model.identity?.hasKey() ?? false) && !isProcessing {
         Button(action: {
-          model.createIdentity()
-          model.generateKey()
+          withAnimation {
+            isProcessing = true
+          }
+          DispatchQueue.global().async {
+            sleep(1)
+            DispatchQueue.main.async {
+              model.createIdentity()
+              model.generateKey()
+              withAnimation {
+                isProcessing = false
+              }
+            }
+          }
         }) {
-          Text("Generate Key")
+          Text((isProcessing ? "Generating key..." : "Generate Key"))
             .font(.headline)
             .padding()
-            .background(Color.blue)
+            .background((isProcessing ? Color.gray : Color.blue))
             .foregroundColor(.white)
             .cornerRadius(8)
-        }
+        }.disabled(isProcessing)
       }
 
       // If the key is generated, display the fingerprint

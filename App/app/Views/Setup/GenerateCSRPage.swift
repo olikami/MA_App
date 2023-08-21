@@ -10,6 +10,7 @@ import SwiftUI
 struct GenerateCSRPage: View {
   let nextPage: () -> Void
   @EnvironmentObject var model: Model
+  @State private var isProcessing = false
 
   var body: some View {
     if let identity = model.identity, let person = model.person, identity.hasKey() {
@@ -28,13 +29,22 @@ struct GenerateCSRPage: View {
         .padding()
 
         Button(action: {
-          identity.generateCSR(name: person.name)
-          nextPage()
+          withAnimation {
+            isProcessing = true
+          }
+          DispatchQueue.global().async {
+            identity.generateCSR(name: person.name)
+            sleep(1)
+            DispatchQueue.main.async {
+              nextPage()
+            }
+          }
+
         }) {
-          Text("Request certificate")
+          Text((isProcessing ? "Requesting certificate" : "Request certificate"))
             .font(.headline)
             .padding()
-            .background(Color.blue)
+            .background((isProcessing ? Color.gray : Color.blue))
             .foregroundColor(.white)
             .cornerRadius(8)
         }
