@@ -12,7 +12,7 @@ import Security
 
 class Identity: ObservableObject {
   @Published var csr: String?
-  @Published var applictionUser: ApplicationUser?
+  @Published var applictionUser: ApiApplicationUser?
 
   let tagPrivate = "contact.oli.mt.app.private.ec"
   let tagPublic = "contact.oli.mt.app.public.ec"
@@ -149,7 +149,7 @@ class Identity: ObservableObject {
   func createApplicationUser(name: String) {
     let endpoint = "identity/application_user/"
     let (firstName, lastName) = splitName(name)
-    let data = ApplicationUser(
+    let data = ApiApplicationUser(
       first_name: firstName, last_name: lastName ?? "", url: nil, uuid: nil)
 
     httpRequest(endpoint: endpoint, method: .post, data: data) { data, response, error in
@@ -157,7 +157,7 @@ class Identity: ObservableObject {
       if let data = data {
         do {
           let decoder = JSONDecoder()
-          let returnedUser = try decoder.decode(ApplicationUser.self, from: data)
+          let returnedUser = try decoder.decode(ApiApplicationUser.self, from: data)
           self.applictionUser = returnedUser
         } catch {
           print("Failed to decode the response data: \(error)")

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ApplicationUser: Codable {
+struct ApiApplicationUser: Codable {
 
   let first_name: String
   let last_name: String
