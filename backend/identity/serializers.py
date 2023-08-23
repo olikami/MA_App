@@ -12,6 +12,7 @@ class ApplicationUserSerializer(serializers.HyperlinkedModelSerializer):
         model = ApplicationUser
         fields = [
             "url",
+            "uuid",
             "first_name",
             "last_name",
         ]
