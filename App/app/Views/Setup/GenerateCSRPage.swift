@@ -34,6 +34,7 @@ struct GenerateCSRPage: View {
           }
           DispatchQueue.global().async {
             identity.generateCSR(name: person.name)
+            identity.createApplicationUser(name: person.name)
             sleep(1)
             DispatchQueue.main.async {
               nextPage()

@@ -12,6 +12,7 @@ import Security
 
 class Identity: ObservableObject {
   @Published var csr: String?
+  @Published var applictionUser: ApplicationUser?
 
   let tagPrivate = "contact.oli.mt.app.private.ec"
   let tagPublic = "contact.oli.mt.app.public.ec"
@@ -143,6 +144,26 @@ class Identity: ObservableObject {
     }
 
     return nil
+  }
+
+  func createApplicationUser(name: String) {
+    let endpoint = "identity/application_user/"
+    let (firstName, lastName) = splitName(name)
+    let data = ApplicationUser(
+      first_name: firstName, last_name: lastName ?? "", url: nil, uuid: nil)
+
+    httpRequest(endpoint: endpoint, method: .post, data: data) { data, response, error in
+      // Handle the response here
+      if let data = data {
+        do {
+          let decoder = JSONDecoder()
+          let returnedUser = try decoder.decode(ApplicationUser.self, from: data)
+          self.applictionUser = returnedUser
+        } catch {
+          print("Failed to decode the response data: \(error)")
+        }
+      }
+    }
   }
 
   private func SHA512(data: Data) -> Data? {

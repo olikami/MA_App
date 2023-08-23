@@ -33,6 +33,9 @@
 		4FC5F6372A8F8891002A6001 /* GenerateCSRPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC5F6362A8F8891002A6001 /* GenerateCSRPage.swift */; };
 		4FC5F6392A8F9857002A6001 /* GetCertificatePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC5F6382A8F9857002A6001 /* GetCertificatePage.swift */; };
 		4FC74B422A8EB6FA00750FAA /* GenerateKeyPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC74B412A8EB6FA00750FAA /* GenerateKeyPage.swift */; };
+		4FD673F02A962650001AE9D3 /* splitName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD673EF2A962650001AE9D3 /* splitName.swift */; };
+		4FD673F22A96274B001AE9D3 /* networkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD673F12A96274B001AE9D3 /* networkRequest.swift */; };
+		4FD673F42A962B8F001AE9D3 /* ApplicationUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD673F32A962B8F001AE9D3 /* ApplicationUser.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +65,9 @@
 		4FC5F6362A8F8891002A6001 /* GenerateCSRPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateCSRPage.swift; sourceTree = "<group>"; };
 		4FC5F6382A8F9857002A6001 /* GetCertificatePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetCertificatePage.swift; sourceTree = "<group>"; };
 		4FC74B412A8EB6FA00750FAA /* GenerateKeyPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateKeyPage.swift; sourceTree = "<group>"; };
+		4FD673EF2A962650001AE9D3 /* splitName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = splitName.swift; sourceTree = "<group>"; };
+		4FD673F12A96274B001AE9D3 /* networkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = networkRequest.swift; sourceTree = "<group>"; };
+		4FD673F32A962B8F001AE9D3 /* ApplicationUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationUser.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +101,7 @@
 		4FA424132A8E36C000AFC23A /* app */ = {
 			isa = PBXGroup;
 			children = (
+				4FD673EE2A962641001AE9D3 /* lib */,
 				4FA424242A8E37E700AFC23A /* Views */,
 				4FA424232A8E37B700AFC23A /* Extensions */,
 				4FA424222A8E36EC00AFC23A /* Model */,
@@ -220,6 +227,16 @@
 			path = Setup;
 			sourceTree = "<group>";
 		};
+		4FD673EE2A962641001AE9D3 /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				4FD673EF2A962650001AE9D3 /* splitName.swift */,
+				4FD673F12A96274B001AE9D3 /* networkRequest.swift */,
+				4FD673F32A962B8F001AE9D3 /* ApplicationUser.swift */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -301,6 +318,7 @@
 				4FC74B422A8EB6FA00750FAA /* GenerateKeyPage.swift in Sources */,
 				4F1C52732A8E9C1D00EFBCCE /* WelcomePage.swift in Sources */,
 				4FA424342A8E38C500AFC23A /* Nearby.swift in Sources */,
+				4FD673F42A962B8F001AE9D3 /* ApplicationUser.swift in Sources */,
 				4FA424322A8E38B600AFC23A /* Model.swift in Sources */,
 				4FC5F6372A8F8891002A6001 /* GenerateCSRPage.swift in Sources */,
 				4FA4242E2A8E387E00AFC23A /* Character+Exts.swift in Sources */,
@@ -319,6 +337,8 @@
 				4FA4243B2A8E393C00AFC23A /* CommunityView.swift in Sources */,
 				4FA424152A8E36C000AFC23A /* appApp.swift in Sources */,
 				4FA424442A8E3AF700AFC23A /* PersonInfoView.swift in Sources */,
+				4FD673F22A96274B001AE9D3 /* networkRequest.swift in Sources */,
+				4FD673F02A962650001AE9D3 /* splitName.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
