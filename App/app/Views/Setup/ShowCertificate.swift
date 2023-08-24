@@ -11,6 +11,8 @@ struct ShowCertificate: View {
   @EnvironmentObject var model: Model
 
   var body: some View {
-    Text("Your certificate has been generated.")
+    Text(
+      "Waiting for your certifcate, as soon as it has been generated you will be able to use the app."
+    )
   }
 }
