@@ -3,9 +3,9 @@ import SwiftUI
 
 struct NamePage: View {
   let nextPage: () -> Void
+  @EnvironmentObject var model: Model
 
   @State private var fullName: String = ""
-  @EnvironmentObject var model: Model
   @State private var showInvalidNameMessage: Bool = false
 
   // Timer-related property set to 5 seconds

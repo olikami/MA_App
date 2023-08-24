@@ -12,15 +12,9 @@ struct OfficialView: View {
 
   var body: some View {
     if let person = model.person {
-      Text("Hello, \(person.name)!")
+      Text(person.name)
     } else {
-      EmptyView()
+      Text("Please create your person.")
     }
-  }
-}
-
-struct OfficialView_Previews: PreviewProvider {
-  static var previews: some View {
-    OfficialView()
   }
 }

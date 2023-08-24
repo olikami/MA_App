@@ -13,7 +13,6 @@ struct AroundYouView: View {
   var body: some View {
     if let nearby = model.nearby {
       NavigationView {
-
         List {
           Section("Chats") {
             if nearby.chats.isEmpty {
@@ -44,7 +43,7 @@ struct AroundYouView: View {
         }
       }
     } else {
-      EmptyView()
+      Text("Setup needed")
     }
   }
 }

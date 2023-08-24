@@ -14,7 +14,7 @@ struct CommunityView: View {
     if let person = model.person {
       Text("Hello, \(person.name)!")
     } else {
-      EmptyView()
+      Text("Setup needed")
     }
   }
 }

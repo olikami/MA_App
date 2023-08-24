@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct PersonInfoView: View {
-  var body: some View {
-    Text( /*@START_MENU_TOKEN@*/"Hello, World!" /*@END_MENU_TOKEN@*/)
-  }
-}
+  @EnvironmentObject private var model: Model
 
-struct PersonInfoView_Preview: PreviewProvider {
-  static var previews: some View {
-    PersonInfoView()
+  var body: some View {
+    if let identity = model.identity, let certificate = identity.certificate {
+      Text(certificate)
+    } else {
+      Text("Please create your identity.")
+    }
   }
 }
