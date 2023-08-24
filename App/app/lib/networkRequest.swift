@@ -26,7 +26,7 @@ func httpRequest(
     // If data is provided, try converting to JSON and add to the request body
     if let data = data {
       do {
-        let encoder = JSONEncoder()
+        let encoder = DRFJSONCoder()
         request.httpBody = try encoder.encode(data)  // Corrected this line
       } catch {
         print("Failed to serialize data to JSON: \(error)")
@@ -36,6 +36,14 @@ func httpRequest(
   }
 
   let task = URLSession.shared.dataTask(with: request) { data, response, error in
+    if let httpResponse = response as? HTTPURLResponse {
+      print("Status Code:", httpResponse.statusCode)
+    }
+    if let e = error {
+      print("Error:", e)
+    } else if let d = data {
+      print("Data:", String(data: d, encoding: .utf8) ?? "")
+    }
     completion(data, response, error)
   }
 

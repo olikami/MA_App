@@ -12,7 +12,7 @@ import Security
 
 class Identity: ObservableObject {
   @Published var csr: String?
-  @Published var applictionUser: ApiApplicationUser?
+  @Published var applicationUser: ApiApplicationUser?
 
   let tagPrivate = "contact.oli.mt.app.private.ec"
   let tagPublic = "contact.oli.mt.app.public.ec"
@@ -156,14 +156,67 @@ class Identity: ObservableObject {
       // Handle the response here
       if let data = data {
         do {
-          let decoder = JSONDecoder()
+          let decoder = DRFJSONCoder()
           let returnedUser = try decoder.decode(ApiApplicationUser.self, from: data)
-          self.applictionUser = returnedUser
+          print(returnedUser.url ?? "Somehow no User URL.")
+          self.applicationUser = returnedUser
         } catch {
           print("Failed to decode the response data: \(error)")
         }
       }
     }
+  }
+
+  func requestCertificate() {
+    let endpoint = "identity/csr/"
+    let data = ApiCSR(
+      uuid: nil, url: nil, created: nil, user: (self.applicationUser?.url?.absoluteString)!,
+      csrString: self.csr!,
+      status: nil, certificate: nil)
+
+    httpRequest(endpoint: endpoint, method: .post, data: data) { data, response, error in
+      if let data = data {
+        do {
+          let decoder = DRFJSONCoder()
+          let apiCSR = try decoder.decode(ApiCSR.self, from: data)
+          // Start the polling process
+          if apiCSR.url != nil {
+            self.startPollingForCertificate(apiCSR: apiCSR)
+          }
+        } catch {
+          print("Failed to decode the response data: \(error)")
+        }
+      }
+    }
+  }
+
+  private func startPollingForCertificate(apiCSR: ApiCSR) {
+    guard let url = apiCSR.url else {
+      print("URL is missing!")
+      return
+    }
+
+    let timer = Timer.scheduledTimer(withTimeInterval: 10.0, repeats: true) { timer in
+      URLSession.shared.dataTask(with: url) { data, response, error in
+        if let data = data {
+          do {
+            let decoder = DRFJSONCoder()
+            let updatedApiCSR = try decoder.decode(ApiCSR.self, from: data)
+
+            if let certificate = updatedApiCSR.certificate {
+              print("Certificate found:", certificate)
+              timer.invalidate()  // Stop the timer when the certificate is found
+            }
+
+          } catch {
+            print("Failed to decode the response data during polling: \(error)")
+          }
+        }
+      }.resume()  // Start the URLSession task
+    }
+
+    timer.fire()  // Start the timer immediately
+
   }
 
   private func SHA512(data: Data) -> Data? {

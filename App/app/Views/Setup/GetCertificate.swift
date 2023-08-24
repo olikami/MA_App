@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct GenerateCSRPage: View {
+struct GetCertificate: View {
   let nextPage: () -> Void
   @EnvironmentObject var model: Model
   @State private var isProcessing = false
@@ -36,9 +36,8 @@ struct GenerateCSRPage: View {
             identity.generateCSR(name: person.name)
             identity.createApplicationUser(name: person.name)
             sleep(1)
-            DispatchQueue.main.async {
-              nextPage()
-            }
+            identity.requestCertificate()
+            sleep(1)
           }
 
         }) {

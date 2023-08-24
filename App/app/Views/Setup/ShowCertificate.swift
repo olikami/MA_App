@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct GetCertificatePage: View {
+struct ShowCertificate: View {
   @EnvironmentObject var model: Model
 
   var body: some View {

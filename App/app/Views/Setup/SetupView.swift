@@ -23,8 +23,8 @@ struct SetupView: View {
       NamePage(nextPage: nextPage).tag(2)
       ConfirmName(nextPage: nextPage).tag(3)
       GenerateKeyPage(nextPage: nextPage).tag(4)
-      GenerateCSRPage(nextPage: nextPage).tag(5)
-      GetCertificatePage().tag(6)
+      GetCertificate(nextPage: nextPage).tag(5)
+      ShowCertificate().tag(6)
     }
     .tabViewStyle(PageTabViewStyle())
     .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
