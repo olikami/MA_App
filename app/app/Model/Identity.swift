@@ -13,6 +13,7 @@ import Security
 class Identity: ObservableObject {
   @Published var csr: String?
   @Published var applicationUser: ApiApplicationUser?
+  @Published var certificate: String?
 
   let tagPrivate = "contact.oli.mt.app.private.ec"
   let tagPublic = "contact.oli.mt.app.public.ec"
@@ -196,27 +197,51 @@ class Identity: ObservableObject {
       return
     }
 
-    let timer = Timer.scheduledTimer(withTimeInterval: 10.0, repeats: true) { timer in
-      URLSession.shared.dataTask(with: url) { data, response, error in
-        if let data = data {
-          do {
-            let decoder = DRFJSONCoder()
-            let updatedApiCSR = try decoder.decode(ApiCSR.self, from: data)
+    var shouldContinuePolling = true
 
-            if let certificate = updatedApiCSR.certificate {
-              print("Certificate found:", certificate)
-              timer.invalidate()  // Stop the timer when the certificate is found
+    DispatchQueue.global().async {
+      while shouldContinuePolling {
+        httpRequest(url: url, method: .get) { data, response, error in
+          if let data = data {
+            do {
+              let decoder = DRFJSONCoder()
+              let updatedApiCSR = try decoder.decode(ApiCSR.self, from: data)
+
+              if let certificateUrl = updatedApiCSR.certificate {
+                print("Certificate found:", certificateUrl)
+                self.fetchCertificateDetails(from: certificateUrl) { certificateString in
+                  DispatchQueue.main.async {
+                    self.certificate = certificateString
+                  }
+                  shouldContinuePolling = false
+                }
+
+              }
+            } catch {
+              print("Failed to decode the response data during polling: \(error)")
             }
-
-          } catch {
-            print("Failed to decode the response data during polling: \(error)")
           }
         }
-      }.resume()  // Start the URLSession task
+
+        if shouldContinuePolling {
+          sleep(10)  // Sleep for 10 seconds before the next iteration
+        }
+      }
     }
+  }
 
-    timer.fire()  // Start the timer immediately
-
+  private func fetchCertificateDetails(from url: URL, completion: @escaping (String) -> Void) {
+    httpRequest(url: url, method: .get) { data, response, error in
+      if let data = data {
+        do {
+          let decoder = DRFJSONCoder()
+          let apiCertificate = try decoder.decode(ApiCertificate.self, from: data)
+          completion(apiCertificate.certificateString)
+        } catch {
+          print("Failed to decode ApiCertificate: \(error)")
+        }
+      }
+    }
   }
 
   private func SHA512(data: Data) -> Data? {

@@ -15,7 +15,7 @@ func httpRequest(
     print("Invalid URL")
     return
   }
-  httpRequest(url: url, method: method, completion: completion)
+  httpRequest(url: url, method: method, data: data, completion: completion)
 }
 
 func httpRequest(

@@ -38,6 +38,7 @@ struct GetCertificate: View {
             sleep(1)
             identity.requestCertificate()
             sleep(1)
+            nextPage()
           }
 
         }) {

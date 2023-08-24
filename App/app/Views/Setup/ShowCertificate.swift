@@ -11,6 +11,6 @@ struct ShowCertificate: View {
   @EnvironmentObject var model: Model
 
   var body: some View {
-    Text(model.identity?.csr ?? "No CSR").textSelection(.enabled)
+    Text("Your certificate has been generated.")
   }
 }
