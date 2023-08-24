@@ -15,7 +15,13 @@ func httpRequest(
     print("Invalid URL")
     return
   }
+  httpRequest(url: url, method: method, completion: completion)
+}
 
+func httpRequest(
+  url: URL, method: HttpMethod, data: Codable? = nil,
+  completion: @escaping (Data?, URLResponse?, Error?) -> Void
+) {
   var request = URLRequest(url: url)
   request.httpMethod = method.rawValue
 
