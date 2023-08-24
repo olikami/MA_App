@@ -25,7 +25,7 @@ SECRET_KEY = "gdl1#@a0!u2(^q1zvzu5+8#0ugsy5m8i26f_5*gx+6)03g0c)32p3495rajhdsf019
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["master-thesis.oli.fyi"]
+ALLOWED_HOSTS = ["localhost", "master-thesis.oli.fyi"]
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 CORS_ORIGIN_WHITELIST = [
     "https://master-thesis.oli.fyi",
