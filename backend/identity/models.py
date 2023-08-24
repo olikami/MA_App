@@ -56,7 +56,7 @@ class IntermediateCertificate(models.Model):
         return common_name
 
     def __str__(self):
-        return f"Intermediate Certificate {self.common_name()} of type {self.get_intermediate_type_display()}"
+        return f"Intermediate Certificate {self.common_name()} of type {self.get_type_display()}"
 
 
 class CertificateSigningRequest(models.Model):
