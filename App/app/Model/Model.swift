@@ -220,19 +220,18 @@ class Model: ObservableObject {
     }
   }
 
-  func getCertificates() -> [Certificate]? {
+  func getCertificates() -> [Certificate] {
     let pattern = "-----BEGIN CERTIFICATE-----[\\s\\S]*?-----END CERTIFICATE-----"
     guard let regex = try? NSRegularExpression(pattern: pattern, options: []) else {
-      return nil
+      return []
     }
-    guard let chain = self.certificate_string else { return nil }
+    guard let chain = self.certificate_string else { return [] }
     let nsString = chain as NSString
     let matches = regex.matches(
       in: chain, options: [], range: NSRange(location: 0, length: nsString.length))
     let pemStrings = matches.map { nsString.substring(with: $0.range) }
     do {
       let certificates = try pemStrings.map { try Certificate(pemEncoded: $0) }
-      print(certificates)
       return certificates
     } catch let error {
       print(error)

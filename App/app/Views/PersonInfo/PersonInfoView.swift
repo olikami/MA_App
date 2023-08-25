@@ -6,15 +6,22 @@
 //
 
 import SwiftUI
+import X509
 
 struct PersonInfoView: View {
   @EnvironmentObject private var model: Model
 
+  private var certificates: [Certificate] {
+    model.getCertificates()
+  }
+
   var body: some View {
-    if model.getCertificates()?.count ?? 0 > 0 {
-      Text((model.getCertificates()?[0].subject.description)!)
-    } else {
+    if certificates.isEmpty {
       Text("We don't have a certificate yet.")
+    } else {
+      ForEach(certificates.indices, id: \.self) { index in
+        Text(certificates[index].subject.description)
+      }
     }
   }
 }

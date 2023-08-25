@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4F0485602A98A42D0016AE18 /* CertificateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F04855F2A98A42D0016AE18 /* CertificateView.swift */; };
 		4F1C52732A8E9C1D00EFBCCE /* WelcomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1C52722A8E9C1D00EFBCCE /* WelcomePage.swift */; };
 		4F1C52752A8EA08100EFBCCE /* NamePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1C52742A8EA08100EFBCCE /* NamePage.swift */; };
 		4F1C52772A8EA70500EFBCCE /* ConfirmName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1C52762A8EA70500EFBCCE /* ConfirmName.swift */; };
@@ -43,6 +44,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4F04855F2A98A42D0016AE18 /* CertificateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateView.swift; sourceTree = "<group>"; };
 		4F1C52722A8E9C1D00EFBCCE /* WelcomePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomePage.swift; sourceTree = "<group>"; };
 		4F1C52742A8EA08100EFBCCE /* NamePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NamePage.swift; sourceTree = "<group>"; };
 		4F1C52762A8EA70500EFBCCE /* ConfirmName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmName.swift; sourceTree = "<group>"; };
@@ -244,6 +246,7 @@
 				4FD673F52A963071001AE9D3 /* ApiCSR.swift */,
 				4F41F32E2A97B7FD00121926 /* DRFJSONCoder.swift */,
 				4F41F3302A97E9D500121926 /* ApiCertificate.swift */,
+				4F04855F2A98A42D0016AE18 /* CertificateView.swift */,
 			);
 			path = lib;
 			sourceTree = "<group>";
@@ -340,6 +343,7 @@
 				4FA4242E2A8E387E00AFC23A /* Character+Exts.swift in Sources */,
 				4FA4242C2A8E385400AFC23A /* ChatMessageRow.swift in Sources */,
 				4FA4244C2A8E425000AFC23A /* SetupView.swift in Sources */,
+				4F0485602A98A42D0016AE18 /* CertificateView.swift in Sources */,
 				4FA424302A8E389000AFC23A /* String+Exts.swift in Sources */,
 				4FA424262A8E380F00AFC23A /* ContentView.swift in Sources */,
 				4FA424462A8E3B1900AFC23A /* TextFieldStyles.swift in Sources */,
