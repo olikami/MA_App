@@ -11,10 +11,10 @@ struct PersonInfoView: View {
   @EnvironmentObject private var model: Model
 
   var body: some View {
-    if let certificate = model.certificate {
-      Text(certificate)
+    if model.getCertificates()?.count ?? 0 > 0 {
+      Text((model.getCertificates()?[0].subject.description)!)
     } else {
-      Text("Please create your identity.")
+      Text("We don't have a certificate yet.")
     }
   }
 }

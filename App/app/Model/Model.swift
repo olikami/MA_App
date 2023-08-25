@@ -11,6 +11,7 @@ import CommonCrypto
 import Foundation
 import Security
 import SwiftUI
+import X509
 
 class Model: ObservableObject {
 
@@ -22,9 +23,9 @@ class Model: ObservableObject {
   private var cancellables = Set<AnyCancellable>()
 
   // Identity attributes
-  @Published var csr: String?
+  @Published var csr_string: String?
   @Published var applicationUser: ApiApplicationUser?
-  @Published var certificate: String?
+  @Published var certificate_string: String?
   let tagPrivate = "contact.oli.mt.app.private.ec"
   let tagPublic = "contact.oli.mt.app.public.ec"
   let algorithm = KeyAlgorithm.rsa(signatureType: .sha512)
@@ -155,7 +156,7 @@ class Model: ObservableObject {
     )
 
     DispatchQueue.main.async {
-      self.csr = csrString
+      self.csr_string = csrString
     }
   }
 
@@ -200,7 +201,7 @@ class Model: ObservableObject {
     let endpoint = "identity/csr/"
     let data = ApiCSR(
       uuid: nil, url: nil, created: nil, user: (self.applicationUser?.url?.absoluteString)!,
-      csrString: self.csr!,
+      csrString: self.csr_string!,
       status: nil, certificate: nil)
 
     httpRequest(endpoint: endpoint, method: .post, data: data) { data, response, error in
@@ -217,6 +218,26 @@ class Model: ObservableObject {
         }
       }
     }
+  }
+
+  func getCertificates() -> [Certificate]? {
+    let pattern = "-----BEGIN CERTIFICATE-----[\\s\\S]*?-----END CERTIFICATE-----"
+    guard let regex = try? NSRegularExpression(pattern: pattern, options: []) else {
+      return nil
+    }
+    guard let chain = self.certificate_string else { return nil }
+    let nsString = chain as NSString
+    let matches = regex.matches(
+      in: chain, options: [], range: NSRange(location: 0, length: nsString.length))
+    let pemStrings = matches.map { nsString.substring(with: $0.range) }
+    do {
+      let certificates = try pemStrings.map { try Certificate(pemEncoded: $0) }
+      print(certificates)
+      return certificates
+    } catch let error {
+      print(error)
+    }
+    return []
   }
 
   private func startPollingForCertificate(apiCSR: ApiCSR) {
@@ -239,7 +260,7 @@ class Model: ObservableObject {
                 print("Certificate found:", certificateUrl)
                 self.fetchCertificateDetails(from: certificateUrl) { certificateString in
                   DispatchQueue.main.async {
-                    self.certificate = certificateString
+                    self.certificate_string = certificateString
                     self.setupDone = true
                   }
                   shouldContinuePolling = false
