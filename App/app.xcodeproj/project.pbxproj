@@ -14,6 +14,7 @@
 		4F41F32D2A97B55A00121926 /* ISO8601DateFormatter+Exts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F41F32C2A97B55A00121926 /* ISO8601DateFormatter+Exts.swift */; };
 		4F41F32F2A97B7FD00121926 /* DRFJSONCoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F41F32E2A97B7FD00121926 /* DRFJSONCoder.swift */; };
 		4F41F3312A97E9D500121926 /* ApiCertificate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F41F3302A97E9D500121926 /* ApiCertificate.swift */; };
+		4F7F7DFD2A9891EA005B06F8 /* X509 in Frameworks */ = {isa = PBXBuildFile; productRef = 4F7F7DFC2A9891EA005B06F8 /* X509 */; };
 		4FA424152A8E36C000AFC23A /* appApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA424142A8E36C000AFC23A /* appApp.swift */; };
 		4FA424192A8E36C100AFC23A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4FA424182A8E36C100AFC23A /* Assets.xcassets */; };
 		4FA4241C2A8E36C100AFC23A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4FA4241B2A8E36C100AFC23A /* Preview Assets.xcassets */; };
@@ -81,6 +82,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F7F7DFD2A9891EA005B06F8 /* X509 in Frameworks */,
 				4F3BB1E52A8F560400A6D56F /* CertificateSigningRequest in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -264,6 +266,7 @@
 			name = app;
 			packageProductDependencies = (
 				4F3BB1E42A8F560400A6D56F /* CertificateSigningRequest */,
+				4F7F7DFC2A9891EA005B06F8 /* X509 */,
 			);
 			productName = app;
 			productReference = 4FA424112A8E36C000AFC23A /* app.app */;
@@ -295,6 +298,7 @@
 			mainGroup = 4FA424082A8E36C000AFC23A;
 			packageReferences = (
 				4F3BB1E32A8F560400A6D56F /* XCRemoteSwiftPackageReference "CertificateSigningRequest" */,
+				4F7F7DFB2A9891EA005B06F8 /* XCRemoteSwiftPackageReference "swift-certificates" */,
 			);
 			productRefGroup = 4FA424122A8E36C000AFC23A /* Products */;
 			projectDirPath = "";
@@ -567,6 +571,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		4F7F7DFB2A9891EA005B06F8 /* XCRemoteSwiftPackageReference "swift-certificates" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-certificates.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.6.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -574,6 +586,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 4F3BB1E32A8F560400A6D56F /* XCRemoteSwiftPackageReference "CertificateSigningRequest" */;
 			productName = CertificateSigningRequest;
+		};
+		4F7F7DFC2A9891EA005B06F8 /* X509 */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4F7F7DFB2A9891EA005B06F8 /* XCRemoteSwiftPackageReference "swift-certificates" */;
+			productName = X509;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
