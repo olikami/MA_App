@@ -20,7 +20,7 @@ struct GenerateKeyPage: View {
         .padding(.top, 40)
 
       // Display the appropriate message depending on whether the key is generated
-      if !(model.identity?.hasKey() ?? false) {
+      if !(model.hasKey()) {
         Text("By pressing the button below, a private key will be generated for you.")
           .font(.body)
           .multilineTextAlignment(.center)
@@ -33,7 +33,7 @@ struct GenerateKeyPage: View {
       }
 
       // Conditionally display the Generate Key button
-      if !(model.identity?.hasKey() ?? false) && !isProcessing {
+      if !(model.hasKey()) && !isProcessing {
         Button(action: {
           withAnimation {
             isProcessing = true
@@ -41,7 +41,6 @@ struct GenerateKeyPage: View {
           DispatchQueue.global().async {
             sleep(1)
             DispatchQueue.main.async {
-              model.createIdentity()
               model.generateKey()
               withAnimation {
                 isProcessing = false
@@ -59,14 +58,14 @@ struct GenerateKeyPage: View {
       }
 
       // If the key is generated, display the fingerprint
-      if let fingerprint = model.identity?.fingerprint() {
+      if let fingerprint = model.fingerprint() {
         Text(fingerprint)
           .font(.body)
           .foregroundColor(.gray)
       }
 
       // Conditionally display the Next button
-      if model.identity?.hasKey() ?? false {
+      if model.hasKey() {
         Button(action: {
           nextPage()
         }) {

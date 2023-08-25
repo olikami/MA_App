@@ -13,7 +13,7 @@ struct GetCertificate: View {
   @State private var isProcessing = false
 
   var body: some View {
-    if let identity = model.identity, let person = model.person, identity.hasKey() {
+    if let person = model.person, model.hasKey() {
 
       VStack(spacing: 20) {
         Text("Request a certificate")
@@ -33,10 +33,10 @@ struct GetCertificate: View {
             isProcessing = true
           }
           DispatchQueue.global().async {
-            identity.generateCSR(name: person.name)
-            identity.createApplicationUser(name: person.name)
+            model.generateCSR(name: person.name)
+            model.createApplicationUser(name: person.name)
             sleep(1)
-            identity.requestCertificate()
+            model.requestCertificate()
             sleep(1)
             nextPage()
           }

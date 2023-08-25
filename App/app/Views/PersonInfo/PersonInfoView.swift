@@ -11,7 +11,7 @@ struct PersonInfoView: View {
   @EnvironmentObject private var model: Model
 
   var body: some View {
-    if let identity = model.identity, let certificate = identity.certificate {
+    if let certificate = model.certificate {
       Text(certificate)
     } else {
       Text("Please create your identity.")

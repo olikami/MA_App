@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4F0644D42A8EB1500052E19A /* Identity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0644D32A8EB1500052E19A /* Identity.swift */; };
 		4F1C52732A8E9C1D00EFBCCE /* WelcomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1C52722A8E9C1D00EFBCCE /* WelcomePage.swift */; };
 		4F1C52752A8EA08100EFBCCE /* NamePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1C52742A8EA08100EFBCCE /* NamePage.swift */; };
 		4F1C52772A8EA70500EFBCCE /* ConfirmName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1C52762A8EA70500EFBCCE /* ConfirmName.swift */; };
@@ -43,7 +42,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		4F0644D32A8EB1500052E19A /* Identity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identity.swift; sourceTree = "<group>"; };
 		4F1C52722A8E9C1D00EFBCCE /* WelcomePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomePage.swift; sourceTree = "<group>"; };
 		4F1C52742A8EA08100EFBCCE /* NamePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NamePage.swift; sourceTree = "<group>"; };
 		4F1C52762A8EA70500EFBCCE /* ConfirmName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmName.swift; sourceTree = "<group>"; };
@@ -134,7 +132,6 @@
 				4FA424312A8E38B600AFC23A /* Model.swift */,
 				4FA424332A8E38C500AFC23A /* Nearby.swift */,
 				4FA424352A8E38DE00AFC23A /* Person.swift */,
-				4F0644D32A8EB1500052E19A /* Identity.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -343,7 +340,6 @@
 				4FA424262A8E380F00AFC23A /* ContentView.swift in Sources */,
 				4FA424462A8E3B1900AFC23A /* TextFieldStyles.swift in Sources */,
 				4FC5F6392A8F9857002A6001 /* ShowCertificate.swift in Sources */,
-				4F0644D42A8EB1500052E19A /* Identity.swift in Sources */,
 				4FA424362A8E38DE00AFC23A /* Person.swift in Sources */,
 				4FA424292A8E383700AFC23A /* ChatView.swift in Sources */,
 				4F1C52752A8EA08100EFBCCE /* NamePage.swift in Sources */,
