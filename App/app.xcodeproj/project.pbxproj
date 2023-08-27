@@ -15,6 +15,8 @@
 		4F41F32D2A97B55A00121926 /* ISO8601DateFormatter+Exts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F41F32C2A97B55A00121926 /* ISO8601DateFormatter+Exts.swift */; };
 		4F41F32F2A97B7FD00121926 /* DRFJSONCoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F41F32E2A97B7FD00121926 /* DRFJSONCoder.swift */; };
 		4F41F3312A97E9D500121926 /* ApiCertificate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F41F3302A97E9D500121926 /* ApiCertificate.swift */; };
+		4F5F97AE2A9B86CE00763CFD /* CertificateCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5F97AD2A9B86CE00763CFD /* CertificateCardView.swift */; };
+		4F5F97B02A9B89BC00763CFD /* fingerprint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5F97AF2A9B89BC00763CFD /* fingerprint.swift */; };
 		4F7F7DFD2A9891EA005B06F8 /* X509 in Frameworks */ = {isa = PBXBuildFile; productRef = 4F7F7DFC2A9891EA005B06F8 /* X509 */; };
 		4FA424152A8E36C000AFC23A /* appApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA424142A8E36C000AFC23A /* appApp.swift */; };
 		4FA424192A8E36C100AFC23A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4FA424182A8E36C100AFC23A /* Assets.xcassets */; };
@@ -51,6 +53,8 @@
 		4F41F32C2A97B55A00121926 /* ISO8601DateFormatter+Exts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ISO8601DateFormatter+Exts.swift"; sourceTree = "<group>"; };
 		4F41F32E2A97B7FD00121926 /* DRFJSONCoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DRFJSONCoder.swift; sourceTree = "<group>"; };
 		4F41F3302A97E9D500121926 /* ApiCertificate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiCertificate.swift; sourceTree = "<group>"; };
+		4F5F97AD2A9B86CE00763CFD /* CertificateCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateCardView.swift; sourceTree = "<group>"; };
+		4F5F97AF2A9B89BC00763CFD /* fingerprint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fingerprint.swift; sourceTree = "<group>"; };
 		4FA424112A8E36C000AFC23A /* app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = app.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FA424142A8E36C000AFC23A /* appApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = appApp.swift; sourceTree = "<group>"; };
 		4FA424182A8E36C100AFC23A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -247,6 +251,8 @@
 				4F41F32E2A97B7FD00121926 /* DRFJSONCoder.swift */,
 				4F41F3302A97E9D500121926 /* ApiCertificate.swift */,
 				4F04855F2A98A42D0016AE18 /* CertificateView.swift */,
+				4F5F97AD2A9B86CE00763CFD /* CertificateCardView.swift */,
+				4F5F97AF2A9B89BC00763CFD /* fingerprint.swift */,
 			);
 			path = lib;
 			sourceTree = "<group>";
@@ -341,6 +347,7 @@
 				4F41F32F2A97B7FD00121926 /* DRFJSONCoder.swift in Sources */,
 				4FC5F6372A8F8891002A6001 /* GetCertificate.swift in Sources */,
 				4FA4242E2A8E387E00AFC23A /* Character+Exts.swift in Sources */,
+				4F5F97AE2A9B86CE00763CFD /* CertificateCardView.swift in Sources */,
 				4FA4242C2A8E385400AFC23A /* ChatMessageRow.swift in Sources */,
 				4FA4244C2A8E425000AFC23A /* SetupView.swift in Sources */,
 				4F0485602A98A42D0016AE18 /* CertificateView.swift in Sources */,
@@ -348,6 +355,7 @@
 				4FA424262A8E380F00AFC23A /* ContentView.swift in Sources */,
 				4FA424462A8E3B1900AFC23A /* TextFieldStyles.swift in Sources */,
 				4FC5F6392A8F9857002A6001 /* ShowCertificate.swift in Sources */,
+				4F5F97B02A9B89BC00763CFD /* fingerprint.swift in Sources */,
 				4FA424362A8E38DE00AFC23A /* Person.swift in Sources */,
 				4FA424292A8E383700AFC23A /* ChatView.swift in Sources */,
 				4F1C52752A8EA08100EFBCCE /* NamePage.swift in Sources */,
