@@ -9,19 +9,21 @@ struct CertificateView: View {
   var body: some View {
     VStack {
       if let firstCertificate = certificates.first {
-        CertificateCardView(certificate: firstCertificate)
-      }
-
-      Spacer()
-
-      Button(action: {
-        showOverlay.toggle()
-      }) {
-        Image(systemName: "info.circle")
-          .resizable()
-          .frame(width: 20, height: 20)
+        ZStack(alignment: .topTrailing) {
+          CertificateCardView(certificate: firstCertificate)
+          Button(action: {
+            showOverlay.toggle()
+          }) {
+            Image(systemName: "info.circle")
+              .resizable()
+              .frame(width: 20, height: 20)
+          }
+          .foregroundColor(Color.white)
+          .padding(15)
+        }
       }
     }
+    .frame(width: 300)
     .padding(20)
     .sheet(isPresented: $showOverlay) {
       OverlayView(certificates: certificates.reversed())

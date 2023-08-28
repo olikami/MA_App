@@ -70,7 +70,7 @@ struct CertificateCardView: View {
         }
       }
     }
-    .frame(width: 300, height: 180)
+    .frame(width: 300, height: 150)
     .cornerRadius(20)
     .shadow(radius: 5)
   }
