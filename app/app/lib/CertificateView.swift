@@ -20,7 +20,7 @@ struct CertificateView: View {
     VStack {
       if let firstCertificate = certificates.first {
         ZStack(alignment: .topTrailing) {
-          CertificateCardView(certificate: firstCertificate)
+          CertificateCardView(certificate: firstCertificate, cardColor: Color.teal)
           Button(action: {
             showOverlay.toggle()
           }) {
@@ -51,7 +51,29 @@ struct OverlayView: View {
   var body: some View {
     VStack(spacing: 20) {
       ForEach(0..<certificates.count, id: \.self) { index in
-        CertificateCardView(certificate: certificates[index])
+        if index == 0 {
+          if isRootCert(certificate: certificates[index]) {
+            CertificateCardView(certificate: certificates[index], cardColor: Color.black)
+          } else {
+            CertificateCardView(certificate: certificates[index], cardColor: Color.red)
+          }
+        } else {
+          if getCommonName(subject: certificates[index].subject).contains("User")
+            || getCommonName(subject: certificates[index].issuer).contains("User")
+          {
+            CertificateCardView(certificate: certificates[index], cardColor: Color.teal)
+          } else if getCommonName(subject: certificates[index].subject).contains("Moderator")
+            || getCommonName(subject: certificates[index].issuer).contains("Moderator")
+          {
+            CertificateCardView(certificate: certificates[index], cardColor: Color.green)
+          } else if getCommonName(subject: certificates[index].subject).contains("Official")
+            || getCommonName(subject: certificates[index].issuer).contains("Official")
+          {
+            CertificateCardView(certificate: certificates[index], cardColor: Color.blue)
+          } else {
+            CertificateCardView(certificate: certificates[index])
+          }
+        }
 
         if index != certificates.count - 1 {
           HStack {

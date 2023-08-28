@@ -43,6 +43,8 @@
 		4FD673F22A96274B001AE9D3 /* networkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD673F12A96274B001AE9D3 /* networkRequest.swift */; };
 		4FD673F42A962B8F001AE9D3 /* ApiApplicationUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD673F32A962B8F001AE9D3 /* ApiApplicationUser.swift */; };
 		4FD673F62A963071001AE9D3 /* ApiCSR.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD673F52A963071001AE9D3 /* ApiCSR.swift */; };
+		4FE997482A9CEA0E00DDC253 /* getCommonName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE997472A9CEA0E00DDC253 /* getCommonName.swift */; };
+		4FE9974A2A9CEAC500DDC253 /* rootCert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE997492A9CEAC500DDC253 /* rootCert.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -81,6 +83,8 @@
 		4FD673F12A96274B001AE9D3 /* networkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = networkRequest.swift; sourceTree = "<group>"; };
 		4FD673F32A962B8F001AE9D3 /* ApiApplicationUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiApplicationUser.swift; sourceTree = "<group>"; };
 		4FD673F52A963071001AE9D3 /* ApiCSR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiCSR.swift; sourceTree = "<group>"; };
+		4FE997472A9CEA0E00DDC253 /* getCommonName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getCommonName.swift; sourceTree = "<group>"; };
+		4FE997492A9CEAC500DDC253 /* rootCert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = rootCert.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -253,6 +257,8 @@
 				4F04855F2A98A42D0016AE18 /* CertificateView.swift */,
 				4F5F97AD2A9B86CE00763CFD /* CertificateCardView.swift */,
 				4F5F97AF2A9B89BC00763CFD /* fingerprint.swift */,
+				4FE997472A9CEA0E00DDC253 /* getCommonName.swift */,
+				4FE997492A9CEAC500DDC253 /* rootCert.swift */,
 			);
 			path = lib;
 			sourceTree = "<group>";
@@ -354,8 +360,10 @@
 				4FA424302A8E389000AFC23A /* String+Exts.swift in Sources */,
 				4FA424262A8E380F00AFC23A /* ContentView.swift in Sources */,
 				4FA424462A8E3B1900AFC23A /* TextFieldStyles.swift in Sources */,
+				4FE9974A2A9CEAC500DDC253 /* rootCert.swift in Sources */,
 				4FC5F6392A8F9857002A6001 /* ShowCertificate.swift in Sources */,
 				4F5F97B02A9B89BC00763CFD /* fingerprint.swift in Sources */,
+				4FE997482A9CEA0E00DDC253 /* getCommonName.swift in Sources */,
 				4FA424362A8E38DE00AFC23A /* Person.swift in Sources */,
 				4FA424292A8E383700AFC23A /* ChatView.swift in Sources */,
 				4F1C52752A8EA08100EFBCCE /* NamePage.swift in Sources */,

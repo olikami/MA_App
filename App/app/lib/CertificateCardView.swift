@@ -4,22 +4,9 @@ import X509
 
 struct CertificateCardView: View {
   var certificate: Certificate?
-  var cardColor: Color = Color.blue
+  var cardColor: Color = Color.brown
   let textColor: Color = Color.white
   let padding: CGFloat = 20
-
-  func getCommonName(subject: DistinguishedName) -> String {
-    let attribute = subject.first(where: { rdn in
-      return rdn.first(where: { rdna in
-        rdna.type == .RDNAttributeType.commonName
-      }) != nil
-    })
-    let string = attribute?.description ?? "CN=Error"
-    if let range = string.range(of: "CN=") {
-      return String(string[range.upperBound...])
-    }
-    return "Error"
-  }
 
   func getFingerprint(certificate: Certificate) -> String {
     do {
