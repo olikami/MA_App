@@ -6,6 +6,16 @@ struct CertificateView: View {
 
   @State private var showOverlay = false
 
+  var chain: [Bool] {
+    var chain: [Bool] = []
+    certificates.indices.forEach { index in
+      if index < certificates.count - 1 {
+        chain.append(true)
+      }
+    }
+    return chain
+  }
+
   var body: some View {
     VStack {
       if let firstCertificate = certificates.first {
@@ -26,7 +36,7 @@ struct CertificateView: View {
     .frame(width: 300)
     .padding(20)
     .sheet(isPresented: $showOverlay) {
-      OverlayView(certificates: certificates.reversed())
+      OverlayView(certificates: certificates.reversed(), chain: chain)
         .background(Color.white.opacity(0.95))
         .padding()
         .cornerRadius(15)
@@ -36,6 +46,7 @@ struct CertificateView: View {
 
 struct OverlayView: View {
   var certificates: [Certificate]
+  var chain: [Bool]
 
   var body: some View {
     VStack(spacing: 20) {
@@ -47,25 +58,25 @@ struct OverlayView: View {
             Spacer()
             Image(systemName: "signature")
               .resizable()
-              .foregroundColor(Color.green)
+              .foregroundColor(chain[index] ? Color.green : Color.red)
               .frame(width: 20, height: 20)
               .opacity(0)
-            Image(systemName: "checkmark")
+            Image(systemName: chain[index] ? "checkmark" : "xmark")
               .resizable()
-              .foregroundColor(Color.green)
+              .foregroundColor(chain[index] ? Color.green : Color.red)
               .frame(width: 20, height: 20)
               .opacity(0)
             Image(systemName: "arrow.down")
               .resizable()
-              .foregroundColor(Color.green)
+              .foregroundColor(chain[index] ? Color.green : Color.red)
               .frame(width: 30, height: 30)
             Image(systemName: "signature")
               .resizable()
-              .foregroundColor(Color.green)
+              .foregroundColor(chain[index] ? Color.green : Color.red)
               .frame(width: 20, height: 20)
-            Image(systemName: "checkmark")
+            Image(systemName: chain[index] ? "checkmark" : "xmark")
               .resizable()
-              .foregroundColor(Color.green)
+              .foregroundColor(chain[index] ? Color.green : Color.red)
               .frame(width: 18, height: 18)
             Spacer()
           }
