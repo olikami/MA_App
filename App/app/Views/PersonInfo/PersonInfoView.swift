@@ -19,9 +19,7 @@ struct PersonInfoView: View {
     if certificates.isEmpty {
       Text("We don't have a certificate yet.")
     } else {
-      ForEach(certificates.indices, id: \.self) { index in
-        Text(certificates[index].subject.description)
-      }
+      CertificateView(certificates: certificates)
     }
   }
 }
