@@ -31,6 +31,9 @@ class Model: ObservableObject {
   let tagPublic = "contact.oli.mt.app.public.ec"
   let algorithm = KeyAlgorithm.rsa(signatureType: .sha512)
 
+  // Messages attributes
+  @Published var location: Int?
+
   init() {
     self.setupDone = false
   }
@@ -292,6 +295,14 @@ class Model: ObservableObject {
   }
 
   // End Identity
+
+  // Start Messages
+
+  func setLocation(location: Int) {
+    self.location = location
+  }
+
+  // End Messages
 
   func generateKey() {
     self.generatePrivateKey()
