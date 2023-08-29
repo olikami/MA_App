@@ -42,6 +42,7 @@ struct GenerateKeyPage: View {
             sleep(1)
             DispatchQueue.main.async {
               model.generateKey()
+              sleep(1)
               withAnimation {
                 isProcessing = false
               }
@@ -65,7 +66,7 @@ struct GenerateKeyPage: View {
       }
 
       // Conditionally display the Next button
-      if model.hasKey() {
+      if model.hasKey() && isProcessing == false {
         Button(action: {
           nextPage()
         }) {
