@@ -26,6 +26,7 @@ class Model: ObservableObject {
   @Published var csr_string: String?
   @Published var applicationUser: ApiApplicationUser?
   @Published var certificate_string: String?
+  @Published var hasKey: Bool = false
   let tagPrivate = "contact.oli.mt.app.private.ec"
   let tagPublic = "contact.oli.mt.app.public.ec"
   let algorithm = KeyAlgorithm.rsa(signatureType: .sha512)
@@ -81,6 +82,7 @@ class Model: ObservableObject {
 
     let error: UnsafeMutablePointer<Unmanaged<CFError>?>? = nil
     let privateKey = SecKeyCreateRandomKey(parameters as CFDictionary, error)
+    hasKey = true
 
     if privateKey == nil {
       print("Error creating keys occured: keys weren't created")
@@ -287,11 +289,6 @@ class Model: ObservableObject {
         }
       }
     }
-  }
-
-  func hasKey() -> Bool {
-    if self.getPrivateKey() != nil { return true }
-    return false
   }
 
   // End Identity

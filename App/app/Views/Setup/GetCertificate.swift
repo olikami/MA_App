@@ -13,7 +13,7 @@ struct GetCertificate: View {
   @State private var isProcessing = false
 
   var body: some View {
-    if let person = model.person, model.hasKey() {
+    if let person = model.person, model.hasKey {
 
       VStack(spacing: 20) {
         Text("Request a certificate")
