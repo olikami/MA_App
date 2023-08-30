@@ -20,7 +20,7 @@ class Message(models.Model):
     content = models.TextField()
     sent = models.DateTimeField(auto_now_add=True)
     signature = models.CharField(max_length=255)
-    author = models.ForeignKey(ApplicationUser, on_delete=models.CASCADE)
+    certificate = models.TextField()
     location = models.ForeignKey(
         Location,
         on_delete=models.CASCADE,

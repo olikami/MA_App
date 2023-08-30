@@ -3,11 +3,10 @@ from .models import Location, Message
 
 
 class SimpleMessageSerializer(serializers.ModelSerializer):
-    author = serializers.PrimaryKeyRelatedField(read_only=True)
 
     class Meta:
         model = Message
-        fields = ["id", "content", "sent", "signature", "author"]
+        fields = ["id", "content", "sent", "signature", "certificate"]
 
 
 class LocationSerializer(serializers.ModelSerializer):
@@ -26,5 +25,5 @@ class MessageSerializer(serializers.ModelSerializer):
             "content",
             "sent",
             "signature",
-            "author",
+            "certificate",
         ]

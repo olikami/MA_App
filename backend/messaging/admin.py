@@ -6,8 +6,8 @@ admin.site.register(Location)
 
 
 class MessageAdmin(admin.ModelAdmin):
-    list_display = ("content", "author", "sent", "location")
-    list_filter = ("sent", "author", "location")
+    list_display = ("content", "sent", "location")
+    list_filter = ("sent", "location")
     search_fields = (
         "content",
         "author__username",
