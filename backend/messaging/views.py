@@ -4,7 +4,7 @@ from .serializers import LocationSerializer, MessageSerializer
 
 
 class LocationViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = Location.objects.all()
+    queryset = Location.objects.order_by("postcode")
     serializer_class = LocationSerializer
 
 
