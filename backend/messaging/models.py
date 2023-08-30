@@ -13,7 +13,7 @@ class Location(models.Model):
         return str(self.postcode)
 
     def messages(self):
-        return Message.objects.filter(location=self).order_by("-sent")[:100].order_by("sent")
+        return Message.objects.filter(location=self).order_by("-sent")[:100]
 
 
 class Message(models.Model):
