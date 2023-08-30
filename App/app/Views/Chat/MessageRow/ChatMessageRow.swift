@@ -11,10 +11,7 @@ struct ChatMessageRow: View {
   @EnvironmentObject private var model: Model
   let message: Message
   let geo: GeometryProxy
-
-  var isCurrentUser: Bool {
-    message.from.id == model.nearby?.myPerson.id
-  }
+  var isCurrentUser: Bool
 
   var body: some View {
 

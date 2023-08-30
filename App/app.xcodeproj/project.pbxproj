@@ -20,6 +20,7 @@
 		4F5F97B02A9B89BC00763CFD /* fingerprint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5F97AF2A9B89BC00763CFD /* fingerprint.swift */; };
 		4F7326D62A9E6A9500546DB2 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7326D52A9E6A9500546DB2 /* Location.swift */; };
 		4F7F7DFD2A9891EA005B06F8 /* X509 in Frameworks */ = {isa = PBXBuildFile; productRef = 4F7F7DFC2A9891EA005B06F8 /* X509 */; };
+		4F80C4DD2A9F56FB00AADBB7 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F80C4DC2A9F56FB00AADBB7 /* Message.swift */; };
 		4FA424152A8E36C000AFC23A /* appApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA424142A8E36C000AFC23A /* appApp.swift */; };
 		4FA424192A8E36C100AFC23A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4FA424182A8E36C100AFC23A /* Assets.xcassets */; };
 		4FA4241C2A8E36C100AFC23A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4FA4241B2A8E36C100AFC23A /* Preview Assets.xcassets */; };
@@ -29,7 +30,6 @@
 		4FA4242E2A8E387E00AFC23A /* Character+Exts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA4242D2A8E387E00AFC23A /* Character+Exts.swift */; };
 		4FA424302A8E389000AFC23A /* String+Exts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA4242F2A8E389000AFC23A /* String+Exts.swift */; };
 		4FA424322A8E38B600AFC23A /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA424312A8E38B600AFC23A /* Model.swift */; };
-		4FA424342A8E38C500AFC23A /* Nearby.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA424332A8E38C500AFC23A /* Nearby.swift */; };
 		4FA424362A8E38DE00AFC23A /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA424352A8E38DE00AFC23A /* Person.swift */; };
 		4FA4243B2A8E393C00AFC23A /* CommunityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA4243A2A8E393C00AFC23A /* CommunityView.swift */; };
 		4FA4243E2A8E395500AFC23A /* AroundYouView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA4243D2A8E395400AFC23A /* AroundYouView.swift */; };
@@ -61,6 +61,7 @@
 		4F5F97AD2A9B86CE00763CFD /* CertificateCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateCardView.swift; sourceTree = "<group>"; };
 		4F5F97AF2A9B89BC00763CFD /* fingerprint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fingerprint.swift; sourceTree = "<group>"; };
 		4F7326D52A9E6A9500546DB2 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		4F80C4DC2A9F56FB00AADBB7 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		4FA424112A8E36C000AFC23A /* app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = app.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FA424142A8E36C000AFC23A /* appApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = appApp.swift; sourceTree = "<group>"; };
 		4FA424182A8E36C100AFC23A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -71,7 +72,6 @@
 		4FA4242D2A8E387E00AFC23A /* Character+Exts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Character+Exts.swift"; sourceTree = "<group>"; };
 		4FA4242F2A8E389000AFC23A /* String+Exts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Exts.swift"; sourceTree = "<group>"; };
 		4FA424312A8E38B600AFC23A /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
-		4FA424332A8E38C500AFC23A /* Nearby.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nearby.swift; sourceTree = "<group>"; };
 		4FA424352A8E38DE00AFC23A /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		4FA4243A2A8E393C00AFC23A /* CommunityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityView.swift; sourceTree = "<group>"; };
 		4FA4243D2A8E395400AFC23A /* AroundYouView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AroundYouView.swift; sourceTree = "<group>"; };
@@ -146,7 +146,6 @@
 			isa = PBXGroup;
 			children = (
 				4FA424312A8E38B600AFC23A /* Model.swift */,
-				4FA424332A8E38C500AFC23A /* Nearby.swift */,
 				4FA424352A8E38DE00AFC23A /* Person.swift */,
 				4F7326D52A9E6A9500546DB2 /* Location.swift */,
 			);
@@ -265,6 +264,7 @@
 				4FE997472A9CEA0E00DDC253 /* getCommonName.swift */,
 				4FE997492A9CEAC500DDC253 /* rootCert.swift */,
 				4F3B4C592A9E7472004E19A6 /* postcodeFormatter.swift */,
+				4F80C4DC2A9F56FB00AADBB7 /* Message.swift */,
 			);
 			path = lib;
 			sourceTree = "<group>";
@@ -353,7 +353,6 @@
 				4FA4243E2A8E395500AFC23A /* AroundYouView.swift in Sources */,
 				4FC74B422A8EB6FA00750FAA /* GenerateKeyPage.swift in Sources */,
 				4F1C52732A8E9C1D00EFBCCE /* WelcomePage.swift in Sources */,
-				4FA424342A8E38C500AFC23A /* Nearby.swift in Sources */,
 				4F3B4C5A2A9E7472004E19A6 /* postcodeFormatter.swift in Sources */,
 				4FD673F42A962B8F001AE9D3 /* ApiApplicationUser.swift in Sources */,
 				4FA424322A8E38B600AFC23A /* Model.swift in Sources */,
@@ -369,6 +368,7 @@
 				4FA424462A8E3B1900AFC23A /* TextFieldStyles.swift in Sources */,
 				4FE9974A2A9CEAC500DDC253 /* rootCert.swift in Sources */,
 				4FC5F6392A8F9857002A6001 /* ShowCertificate.swift in Sources */,
+				4F80C4DD2A9F56FB00AADBB7 /* Message.swift in Sources */,
 				4F7326D62A9E6A9500546DB2 /* Location.swift in Sources */,
 				4F5F97B02A9B89BC00763CFD /* fingerprint.swift in Sources */,
 				4FE997482A9CEA0E00DDC253 /* getCommonName.swift in Sources */,

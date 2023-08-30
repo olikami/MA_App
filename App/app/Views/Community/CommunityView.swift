@@ -12,7 +12,7 @@ struct CommunityView: View {
 
   var body: some View {
     if let person = model.person {
-      Text("Hello, \(person.name)!")
+      ChatView()
     } else {
       Text("Setup needed")
     }

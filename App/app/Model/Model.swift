@@ -16,7 +16,6 @@ import X509
 class Model: ObservableObject {
 
   @Published var person: Person?
-  @Published var nearby: Nearby?
 
   // Setup attributes
   @Published var setupDone: Bool = false
