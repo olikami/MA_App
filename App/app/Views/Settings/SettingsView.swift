@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SettingsView: View {
+struct LocationSettingsView: View {
   @EnvironmentObject var model: Model
   @State var locations: [Location] = []
 
@@ -38,12 +38,23 @@ struct SettingsView: View {
   var body: some View {
     NavigationView {
       Form {
-        Picker(selection: selectedLocationBinding, label: Text("Location")) {
-          if self.model.location == nil {
-            Text("Select a location...").tag(nil as Location?)
-          }
-          ForEach(locations, id: \.self) { location in
-            Text(postcodeFormatter(location.postcode)).tag(location as Location?)
+        HStack {
+          Text("Location")  // This is the label on the left
+          Spacer()
+          if locations.count < 1 {
+            // Show loading wheel if locations are being loaded
+            ProgressView()
+              .progressViewStyle(CircularProgressViewStyle())
+          } else {
+            Picker(selection: selectedLocationBinding, label: EmptyView()) {  // Using EmptyView for label since we already have the label on the left
+              if self.model.location == nil {
+                Text("Select a location...").tag(nil as Location?)
+              }
+              ForEach(locations, id: \.self) { location in
+                Text(postcodeFormatter(location.postcode)).tag(location as Location?)
+              }
+            }
+            .frame(maxWidth: .infinity, alignment: .trailing)  // Makes sure the picker takes the available space on the right
           }
         }
       }
@@ -55,7 +66,7 @@ struct SettingsView: View {
 
 struct SettingsView_Previews: PreviewProvider {
   static var previews: some View {
-    SettingsView()
+    LocationSettingsView()
       .environmentObject(Model())
   }
 }

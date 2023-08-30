@@ -32,7 +32,11 @@ class Model: ObservableObject {
   let algorithm = KeyAlgorithm.rsa(signatureType: .sha512)
 
   // Messages attributes
-  @Published var location: Int?
+  @Published var location: Int? {
+    didSet {
+      saveData()
+    }
+  }
 
   init() {
     loadData()

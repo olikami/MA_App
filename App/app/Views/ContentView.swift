@@ -36,7 +36,7 @@ struct ContentView: View {
         Label("You", systemImage: "person.circle.fill")
       }
 
-      SettingsView().tabItem {
+      LocationSettingsView().tabItem {
         Label("Settings", systemImage: "gear")
       }
 
