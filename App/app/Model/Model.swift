@@ -19,7 +19,7 @@ class Model: ObservableObject {
   @Published var nearby: Nearby?
 
   // Setup attributes
-  @Published var setupDone: Bool
+  @Published var setupDone: Bool = false
   private var cancellables = Set<AnyCancellable>()
 
   // Identity attributes
@@ -35,15 +35,11 @@ class Model: ObservableObject {
   @Published var location: Int?
 
   init() {
-    self.setupDone = false
+    loadData()
   }
 
   func createPerson(name: String) {
     self.person = Person(name, id: UUID())
-  }
-
-  func setNearby(person: Person) {
-    self.nearby = Nearby(person: person)
   }
 
   // Start Identity
@@ -262,6 +258,7 @@ class Model: ObservableObject {
                   DispatchQueue.main.async {
                     self.certificate_string = certificateString
                     self.setupDone = true
+                    self.saveData()
                   }
                   shouldContinuePolling = false
                 }
@@ -311,17 +308,44 @@ class Model: ObservableObject {
   func setupIsDone() {
     self.setupDone = true
   }
-}
 
-extension Model {
-  var needsSetup: Binding<Bool> {
-    Binding<Bool>(
-      get: { self.setupDone == false },
-      set: { newValue in
-        if !newValue {
-          self.person = nil
-        }
+  // Make data persist
+
+  func saveData() {
+    let encoder = DRFJSONCoder()
+
+    if let encodedUser = try? encoder.encode(applicationUser) {
+      UserDefaults.standard.set(encodedUser, forKey: "ApplicationUser")
+    }
+
+    if let encodedPerson = try? encoder.encode(person) {
+      UserDefaults.standard.set(encodedPerson, forKey: "Person")
+    }
+
+    UserDefaults.standard.set(setupDone, forKey: "SetupDone")
+    UserDefaults.standard.set(certificate_string, forKey: "CertificateString")
+    UserDefaults.standard.set(hasKey, forKey: "HasKey")
+    UserDefaults.standard.set(location, forKey: "Location")
+  }
+
+  func loadData() {
+    if let savedUser = UserDefaults.standard.object(forKey: "ApplicationUser") as? Data {
+      let decoder = DRFJSONCoder()
+      if let loadedUser = try? decoder.decode(ApiApplicationUser.self, from: savedUser) {
+        self.applicationUser = loadedUser
       }
-    )
+    }
+
+    if let savedPerson = UserDefaults.standard.object(forKey: "Person") as? Data {
+      let decoder = JSONDecoder()
+      if let loadedPerson = try? decoder.decode(Person.self, from: savedPerson) {
+        self.person = loadedPerson
+      }
+    }
+
+    self.setupDone = UserDefaults.standard.bool(forKey: "SetupDone")
+    self.certificate_string = UserDefaults.standard.string(forKey: "CertificateString")
+    self.hasKey = UserDefaults.standard.bool(forKey: "HasKey")
+    self.location = UserDefaults.standard.integer(forKey: "Location")
   }
 }

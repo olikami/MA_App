@@ -11,6 +11,13 @@ struct ContentView: View {
 
   @EnvironmentObject private var model: Model
 
+  var isSetupViewPresented: Binding<Bool> {
+    Binding<Bool>(
+      get: { !self.model.setupDone },
+      set: { newValue in self.model.setupDone = !newValue }
+    )
+  }
+
   var body: some View {
     TabView {
       AroundYouView().tabItem {
@@ -33,8 +40,8 @@ struct ContentView: View {
         Label("Settings", systemImage: "gear")
       }
 
-    }.sheet(isPresented: model.needsSetup) {
-      SetupView()
+    }.sheet(isPresented: isSetupViewPresented) {
+      SetupView().interactiveDismissDisabled(true)
     }
   }
 }
