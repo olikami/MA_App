@@ -8,7 +8,8 @@ import MultipeerConnectivity
 import SwiftUI
 
 struct ChatView: View {
-  @State private var messages: [Message] = []
+  var messages: [Message]
+  var sendMessage: (String) -> Void
 
   @State private var newMessage: String = ""
 
@@ -44,7 +45,7 @@ struct ChatView: View {
             Button {
               if !newMessage.isEmpty {
                 DispatchQueue.main.async {
-                  messages.append(Message(text: newMessage))
+                  sendMessage(newMessage)
                   newMessage = ""
                 }
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
@@ -79,7 +80,11 @@ struct ChatView_Previews: PreviewProvider {
   static var model = Model()
   static var person = Person(UIDevice.current.name, id: UUID())
 
+  static func sendMessage(newMessage: String) {
+    return
+  }
+
   static var previews: some View {
-    ChatView().environmentObject(model)
+    ChatView(messages: model.communityMessages, sendMessage: sendMessage).environmentObject(model)
   }
 }

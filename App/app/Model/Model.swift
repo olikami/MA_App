@@ -36,6 +36,7 @@ class Model: ObservableObject {
       saveData()
     }
   }
+  @Published var communityMessages: [Message] = []
 
   init() {
     loadData()
@@ -300,6 +301,36 @@ class Model: ObservableObject {
 
   func setLocation(location: Int) {
     self.location = location
+  }
+
+  func sendCommunityMessage(newMessage: String) {
+    // Convert the message to Data
+    guard let messageData = newMessage.data(using: .utf8) else { return }
+
+    guard let privateKey = self.getPrivateKey() else { return }
+
+    // Create a signature
+    var error: Unmanaged<CFError>?
+    guard
+      let signature = SecKeyCreateSignature(
+        privateKey,
+        .rsaSignatureDigestPKCS1v15SHA512,
+        messageData as CFData,
+        &error
+      )
+    else {
+      print("Error signing message: \(String(describing: error?.takeRetainedValue()))")
+      return
+    }
+
+    // Convert the signature to Base64 string for easier storage/transmission
+    let signatureString = (signature as Data).base64EncodedString()
+
+    let newMessageObject = Message(
+      text: newMessage, signature: signatureString, certificate: self.certificate_string)
+
+    self.communityMessages.append(newMessageObject)
+
   }
 
   // End Messages
