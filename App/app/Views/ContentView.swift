@@ -20,10 +20,9 @@ struct ContentView: View {
 
   var body: some View {
     TabView {
-      AroundYouView().tabItem {
+      /*AroundYouView().tabItem {
         Label("Around You", systemImage: "location.circle")
-      }
-
+      }*/
       CommunityView().tabItem {
         Label("Community", systemImage: "building.columns.fill")
       }

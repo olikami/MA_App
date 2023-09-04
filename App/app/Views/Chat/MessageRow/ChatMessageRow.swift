@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import X509
 
 struct ChatMessageRow: View {
   @EnvironmentObject private var model: Model
@@ -13,30 +14,50 @@ struct ChatMessageRow: View {
   let geo: GeometryProxy
   var isCurrentUser: Bool
 
+  var userCertificate: Certificate? {
+    guard let certificate_string = message.certificate else {
+      return nil
+    }
+    return getCertificatesFromCertifcateString(certificatestring: certificate_string)[0]
+  }
+
+  var bubbleColor: Color {
+    guard let certifiate = userCertificate else {
+      return Color.red
+    }
+    let issuerCommonName = getCommonName(subject: certifiate.issuer)
+
+    if issuerCommonName.contains("Official") {
+      return Color.blue
+    } else if issuerCommonName.contains("Community") {
+      return Color.green
+    } else {
+      return Color.teal
+    }
+  }
+
   var body: some View {
 
     HStack {
       if isCurrentUser {
         Spacer(minLength: geo.size.width * 0.2)
       }
-      VStack(alignment: isCurrentUser ? .trailing : .leading) {
+      VStack(alignment: isCurrentUser ? .trailing : .leading, spacing: 0) {
         if !isCurrentUser {
-          if let certificate_string = message.certificate {
+          if let message_certificate = userCertificate {
             Text(
               getCommonName(
-                subject: getCertificatesFromCertifcateString(certificatestring: certificate_string)[
-                  0
-                ].subject)
+                subject: message_certificate.subject)
             ).font(.caption)
           }
         }
         if !message.content.trimmingCharacters(in: .whitespacesAndNewlines).containsOnlyEmoji {
           Text(message.content)
-            .foregroundColor(isCurrentUser ? .white : .primary)
+            .foregroundColor(isCurrentUser ? .primary : .white)
             .padding(.horizontal)
             .padding(.vertical, 8)
             .background(
-              isCurrentUser ? .blue : Color(uiColor: .secondarySystemBackground),
+              isCurrentUser ? Color(hex: 0xe0e0e0) : bubbleColor,
               in: RoundedRectangle(cornerRadius: 20.0, style: .continuous))
         } else {
           Text(message.content.trimmingCharacters(in: .whitespacesAndNewlines))

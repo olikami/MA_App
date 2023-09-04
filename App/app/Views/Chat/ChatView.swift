@@ -12,6 +12,8 @@ struct ChatView: View {
   var messages: [Message]
   var sendMessage: (String) -> Void
 
+  @FocusState private var inputFocused: Bool
+
   @State private var newMessage: String = ""
 
   var body: some View {
@@ -19,7 +21,7 @@ struct ChatView: View {
       ScrollViewReader { scrollView in
         VStack {
           ScrollView {
-            VStack(spacing: 4) {
+            VStack(spacing: 8) {
               ForEach(messages, id: \.id) { message in
                 ChatMessageRow(
                   message: message, geo: geometry,
@@ -48,12 +50,14 @@ struct ChatView: View {
               .textFieldStyle(RoundedTextFieldStyle())
               .animation(.spring(), value: newMessage)
               .padding(.horizontal)
+              .focused($inputFocused)
 
             Button {
               if !newMessage.isEmpty {
                 DispatchQueue.main.async {
                   sendMessage(newMessage)
                   newMessage = ""
+                  inputFocused = false
                 }
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                   if let last = messages.last {

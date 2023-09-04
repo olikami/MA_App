@@ -47,6 +47,7 @@
 		4FD673F42A962B8F001AE9D3 /* ApiApplicationUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD673F32A962B8F001AE9D3 /* ApiApplicationUser.swift */; };
 		4FD673F62A963071001AE9D3 /* ApiCSR.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD673F52A963071001AE9D3 /* ApiCSR.swift */; };
 		4FE8F8C02AA62D75002CB478 /* getCertificatesFromCertificateString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE8F8BF2AA62D75002CB478 /* getCertificatesFromCertificateString.swift */; };
+		4FE8F8C22AA6554D002CB478 /* Color+Exts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE8F8C12AA6554D002CB478 /* Color+Exts.swift */; };
 		4FE997482A9CEA0E00DDC253 /* getCommonName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE997472A9CEA0E00DDC253 /* getCommonName.swift */; };
 		4FE9974A2A9CEAC500DDC253 /* rootCert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE997492A9CEAC500DDC253 /* rootCert.swift */; };
 /* End PBXBuildFile section */
@@ -91,6 +92,7 @@
 		4FD673F32A962B8F001AE9D3 /* ApiApplicationUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiApplicationUser.swift; sourceTree = "<group>"; };
 		4FD673F52A963071001AE9D3 /* ApiCSR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiCSR.swift; sourceTree = "<group>"; };
 		4FE8F8BF2AA62D75002CB478 /* getCertificatesFromCertificateString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getCertificatesFromCertificateString.swift; sourceTree = "<group>"; };
+		4FE8F8C12AA6554D002CB478 /* Color+Exts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Exts.swift"; sourceTree = "<group>"; };
 		4FE997472A9CEA0E00DDC253 /* getCommonName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getCommonName.swift; sourceTree = "<group>"; };
 		4FE997492A9CEAC500DDC253 /* rootCert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = rootCert.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -162,6 +164,7 @@
 				4FA4242D2A8E387E00AFC23A /* Character+Exts.swift */,
 				4FA4242F2A8E389000AFC23A /* String+Exts.swift */,
 				4F41F32C2A97B55A00121926 /* ISO8601DateFormatter+Exts.swift */,
+				4FE8F8C12AA6554D002CB478 /* Color+Exts.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -368,6 +371,7 @@
 				4FC5F6372A8F8891002A6001 /* GetCertificate.swift in Sources */,
 				4FA4242E2A8E387E00AFC23A /* Character+Exts.swift in Sources */,
 				4F5F97AE2A9B86CE00763CFD /* CertificateCardView.swift in Sources */,
+				4FE8F8C22AA6554D002CB478 /* Color+Exts.swift in Sources */,
 				4FA4242C2A8E385400AFC23A /* ChatMessageRow.swift in Sources */,
 				4FA4244C2A8E425000AFC23A /* SetupView.swift in Sources */,
 				4F0485602A98A42D0016AE18 /* CertificateView.swift in Sources */,
