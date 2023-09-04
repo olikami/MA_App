@@ -3,7 +3,6 @@ from .models import Location, Message
 
 
 class SimpleMessageSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = Message
         fields = ["id", "content", "sent", "signature", "certificate"]
@@ -18,13 +17,8 @@ class LocationSerializer(serializers.ModelSerializer):
 
 
 class MessageSerializer(serializers.ModelSerializer):
+    location = serializers.PrimaryKeyRelatedField(many=False)
+
     class Meta:
         model = Message
-        fields = [
-            "id",
-            "content",
-            "sent",
-            "signature",
-            "certificate",
-            "location"
-        ]
+        fields = ["id", "content", "sent", "signature", "certificate", "location"]
