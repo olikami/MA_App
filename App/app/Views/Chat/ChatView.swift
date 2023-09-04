@@ -8,6 +8,7 @@ import MultipeerConnectivity
 import SwiftUI
 
 struct ChatView: View {
+  var model: Model
   var messages: [Message]
   var sendMessage: (String) -> Void
 
@@ -20,8 +21,14 @@ struct ChatView: View {
           ScrollView {
             VStack(spacing: 4) {
               ForEach(messages, id: \.id) { message in
-                ChatMessageRow(message: message, geo: geometry, isCurrentUser: true)
-                  .padding(.horizontal)
+                ChatMessageRow(
+                  message: message, geo: geometry,
+                  isCurrentUser: getCommonName(
+                    subject: getCertificatesFromCertifcateString(
+                      certificatestring: message.certificate!)[0].subject)
+                    == getCommonName(subject: model.getCertificates()[0].subject)
+                )
+                .padding(.horizontal)
               }
             }
           }
@@ -85,6 +92,7 @@ struct ChatView_Previews: PreviewProvider {
   }
 
   static var previews: some View {
-    ChatView(messages: model.communityMessages, sendMessage: sendMessage).environmentObject(model)
+    ChatView(model: model, messages: model.communityMessages, sendMessage: sendMessage)
+      .environmentObject(model)
   }
 }

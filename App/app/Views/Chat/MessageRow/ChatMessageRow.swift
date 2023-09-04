@@ -19,7 +19,17 @@ struct ChatMessageRow: View {
       if isCurrentUser {
         Spacer(minLength: geo.size.width * 0.2)
       }
-      VStack(alignment: .trailing) {
+      VStack(alignment: isCurrentUser ? .trailing : .leading) {
+        if !isCurrentUser {
+          if let certificate_string = message.certificate {
+            Text(
+              getCommonName(
+                subject: getCertificatesFromCertifcateString(certificatestring: certificate_string)[
+                  0
+                ].subject)
+            ).font(.caption)
+          }
+        }
         if !message.content.trimmingCharacters(in: .whitespacesAndNewlines).containsOnlyEmoji {
           Text(message.content)
             .foregroundColor(isCurrentUser ? .white : .primary)

@@ -17,7 +17,8 @@ struct CommunityView: View {
   var body: some View {
     if let location = model.location {
       NavigationView {
-        ChatView(messages: model.communityMessages, sendMessage: sendMessage).toolbar {
+        ChatView(model: model, messages: model.communityMessages, sendMessage: sendMessage).toolbar
+        {
           ToolbarItem(placement: .principal) {
             VStack {
               Text(postcodeFormatter(location)).font(.headline)
