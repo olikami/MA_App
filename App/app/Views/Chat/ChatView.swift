@@ -25,10 +25,9 @@ struct ChatView: View {
               ForEach(messages, id: \.id) { message in
                 ChatMessageRow(
                   message: message, geo: geometry,
-                  isCurrentUser: getCommonName(
-                    subject: getCertificatesFromCertifcateString(
-                      certificatestring: message.certificate!)[0].subject)
-                    == getCommonName(subject: model.getCertificates()[0].subject)
+                  isCurrentUser: getCertificatesFromCertifcateString(
+                    certificatestring: message.certificate!)[0]
+                    == model.getCertificates()[0]
                 )
                 .padding(.horizontal)
               }
