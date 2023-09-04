@@ -17,7 +17,9 @@ class LocationSerializer(serializers.ModelSerializer):
 
 
 class MessageSerializer(serializers.ModelSerializer):
-    location = serializers.PrimaryKeyRelatedField(many=False)
+    location = serializers.PrimaryKeyRelatedField(
+        many=False, queryset=Location.objects.all()
+    )
 
     class Meta:
         model = Message
