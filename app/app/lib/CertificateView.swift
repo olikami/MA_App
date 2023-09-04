@@ -26,7 +26,10 @@ struct CertificateView: View {
     VStack {
       if let firstCertificate = certificates.first {
         ZStack(alignment: .topTrailing) {
-          CertificateCardView(certificate: firstCertificate, cardColor: Color.teal)
+          CertificateCardView(
+            certificate: firstCertificate,
+            cardColor: getCommonName(subject: firstCertificate.issuer).contains("Community")
+              ? Color.green : Color.teal)
           Button(action: {
             showOverlay.toggle()
           }) {
@@ -69,8 +72,8 @@ struct OverlayView: View {
               || getCommonName(subject: certificates[index].issuer).contains("User")
             {
               CertificateCardView(certificate: certificates[index], cardColor: Color.teal)
-            } else if getCommonName(subject: certificates[index].subject).contains("Moderator")
-              || getCommonName(subject: certificates[index].issuer).contains("Moderator")
+            } else if getCommonName(subject: certificates[index].subject).contains("Community")
+              || getCommonName(subject: certificates[index].issuer).contains("Community")
             {
               CertificateCardView(certificate: certificates[index], cardColor: Color.green)
             } else if getCommonName(subject: certificates[index].subject).contains("Official")
