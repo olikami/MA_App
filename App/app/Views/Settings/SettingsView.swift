@@ -10,15 +10,25 @@ import SwiftUI
 struct LocationSettingsView: View {
   @EnvironmentObject var model: Model
   @State var locations: [Location] = []
+  @State var fetchError: String?
 
   func fetchLocations() {
     let url = URL(string: "https://master-thesis.oli.fyi/messages/locations/")!
     URLSession.shared.dataTask(with: url) { (data, response, error) in
-      if let data = data {
-        if let decodedLocations = try? JSONDecoder().decode([Location].self, from: data) {
-          DispatchQueue.main.async {
-            self.locations = decodedLocations
-          }
+      if let error = error {
+        DispatchQueue.main.async {
+          print("Error fetching data: \(error.localizedDescription)")
+        }
+        return
+      }
+      do {
+        let decodedLocations = try DRFJSONCoder().decode([Location].self, from: data!)
+        DispatchQueue.main.async {
+          self.locations = decodedLocations
+        }
+      } catch let decodeError {
+        DispatchQueue.main.async {
+          print("Decoding error: \(decodeError.localizedDescription)")
         }
       }
     }.resume()

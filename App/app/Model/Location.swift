@@ -11,7 +11,7 @@ import SwiftUI
 struct Location: Codable, Identifiable, Hashable {
   let url: URL
   let postcode: Int
-  let messages: [String]
+  let messages: [Message]
 
   var id: Int {
     return postcode

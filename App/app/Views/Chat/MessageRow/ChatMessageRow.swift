@@ -19,7 +19,7 @@ struct ChatMessageRow: View {
       if isCurrentUser {
         Spacer(minLength: geo.size.width * 0.2)
       }
-      VStack {
+      VStack(alignment: .trailing) {
         if !message.content.trimmingCharacters(in: .whitespacesAndNewlines).containsOnlyEmoji {
           Text(message.content)
             .foregroundColor(isCurrentUser ? .white : .primary)

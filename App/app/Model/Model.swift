@@ -33,10 +33,14 @@ class Model: ObservableObject {
   // Messages attributes
   @Published var location: Int? {
     didSet {
+      stopFetchingCommunityMessages()
+      communityMessages = []
       saveData()
+      startFetchingCommunityMessages()
     }
   }
   @Published var communityMessages: [Message] = []
+  private var communityMessageTimer: Timer?
 
   init() {
     loadData()
@@ -371,6 +375,49 @@ class Model: ObservableObject {
 
     self.communityMessages.append(newMessageObject)
 
+  }
+
+  func startFetchingCommunityMessages() {
+    communityMessageTimer?.invalidate()  // Stop any previous timer
+    communityMessageTimer = Timer.scheduledTimer(withTimeInterval: 15.0, repeats: true) {
+      [weak self] _ in
+      self?.fetchCommunityMessages()
+    }
+    fetchCommunityMessages()  // Fetch immediately
+  }
+
+  private func fetchCommunityMessages() {
+    guard let location = self.location else { return }
+    let urlString = "https://master-thesis.oli.fyi/messages/locations/\(location)/"
+    guard let url = URL(string: urlString) else { return }
+
+    let task = URLSession.shared.dataTask(with: url) { [weak self] (data, response, error) in
+      guard let data = data else { return }
+
+      do {
+        let decoder = DRFJSONCoder()
+        let locationResponse = try decoder.decode(Location.self, from: data)
+        self?.updateCommunityMessages(newMessages: locationResponse.messages)
+      } catch {
+        print("Failed to decode JSON:", error)
+      }
+    }
+    task.resume()
+  }
+
+  private func updateCommunityMessages(newMessages: [Message]) {
+    for message in newMessages {
+      if !communityMessages.contains(message) {
+        communityMessages.append(message)
+      }
+    }
+    // Sort by date
+    communityMessages.sort(by: { $0.sent > $1.sent })
+  }
+
+  func stopFetchingCommunityMessages() {
+    communityMessageTimer?.invalidate()
+    communityMessageTimer = nil
   }
 
   // End Messages
