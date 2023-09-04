@@ -22,7 +22,7 @@ class Message(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4)
     content = models.TextField()
     sent = models.DateTimeField(auto_now_add=True)
-    signature = models.CharField(max_length=255)
+    signature = models.CharField(max_length=1024)
     certificate = models.TextField()
     location = models.ForeignKey(
         Location,
