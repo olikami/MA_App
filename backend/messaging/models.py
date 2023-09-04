@@ -1,3 +1,5 @@
+import uuid
+
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 
@@ -17,6 +19,7 @@ class Location(models.Model):
 
 
 class Message(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     content = models.TextField()
     sent = models.DateTimeField(auto_now_add=True)
     signature = models.CharField(max_length=255)
