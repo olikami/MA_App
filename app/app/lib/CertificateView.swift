@@ -29,7 +29,9 @@ struct CertificateView: View {
           CertificateCardView(
             certificate: firstCertificate,
             cardColor: getCommonName(subject: firstCertificate.issuer).contains("Community")
-              ? Color.green : Color.teal)
+              ? Color.green
+              : getCommonName(subject: firstCertificate.issuer).contains("Official")
+                ? Color.blue : Color.teal)
           Button(action: {
             showOverlay.toggle()
           }) {
