@@ -30,4 +30,4 @@ class Message(models.Model):
     )
 
     def __str__(self):
-        return f"Message {self.author} at {self.sent.strftime('%Y-%m-%d %H:%M:%S')}"
+        return f"Message at {self.sent.strftime('%Y-%m-%d %H:%M:%S')}"
