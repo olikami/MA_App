@@ -398,7 +398,7 @@ class Model: ObservableObject {
       }
     }
     // Sort by date
-    communityMessages.sort(by: { $0.sent > $1.sent })
+    communityMessages.sort(by: { $0.sent < $1.sent })
   }
 
   func stopFetchingCommunityMessages() {
