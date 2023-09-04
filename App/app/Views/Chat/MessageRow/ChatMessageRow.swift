@@ -20,8 +20,8 @@ struct ChatMessageRow: View {
         Spacer(minLength: geo.size.width * 0.2)
       }
       VStack {
-        if !message.text.trimmingCharacters(in: .whitespacesAndNewlines).containsOnlyEmoji {
-          Text(message.text)
+        if !message.content.trimmingCharacters(in: .whitespacesAndNewlines).containsOnlyEmoji {
+          Text(message.content)
             .foregroundColor(isCurrentUser ? .white : .primary)
             .padding(.horizontal)
             .padding(.vertical, 8)
@@ -29,7 +29,7 @@ struct ChatMessageRow: View {
               isCurrentUser ? .blue : Color(uiColor: .secondarySystemBackground),
               in: RoundedRectangle(cornerRadius: 20.0, style: .continuous))
         } else {
-          Text(message.text.trimmingCharacters(in: .whitespacesAndNewlines))
+          Text(message.content.trimmingCharacters(in: .whitespacesAndNewlines))
             .font(.system(size: 40))
             .multilineTextAlignment(isCurrentUser ? .trailing : .leading)
             .padding()

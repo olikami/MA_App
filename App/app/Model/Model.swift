@@ -327,7 +327,47 @@ class Model: ObservableObject {
     let signatureString = (signature as Data).base64EncodedString()
 
     let newMessageObject = Message(
-      text: newMessage, signature: signatureString, certificate: self.certificate_string)
+      text: newMessage, signature: signatureString, certificate: self.certificate_string,
+      location: self.location)
+
+    print(signatureString)
+
+    // Send to endpoint
+    let url = URL(string: "https://master-thesis.oli.fyi/messages/messages/")!
+    var request = URLRequest(url: url)
+    request.httpMethod = "POST"
+    request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+    request.addValue("application/json", forHTTPHeaderField: "Accept")
+
+    let encoder = DRFJSONCoder()
+
+    do {
+      let jsonData = try encoder.encode(newMessageObject)
+      request.httpBody = jsonData
+
+      let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+        if let error = error {
+          print("Error sending message: \(error)")
+          return
+        }
+
+        if let httpResponse = response as? HTTPURLResponse,
+          !(200...299).contains(httpResponse.statusCode)
+        {
+          print("Server responded with status code: \(httpResponse.statusCode)")
+          if let data = data {
+            let serverResponseString = String(data: data, encoding: .utf8)
+            print("Server Response: \(String(describing: serverResponseString))")
+          }
+        } else {
+          print("Message sent successfully!")
+        }
+      }
+      task.resume()
+
+    } catch {
+      print("Error encoding message: \(error)")
+    }
 
     self.communityMessages.append(newMessageObject)
 

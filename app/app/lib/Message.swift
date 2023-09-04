@@ -8,18 +8,20 @@
 import Foundation
 
 struct Message: Codable, Hashable {
-  let text: String
+  let content: String
   let id: UUID
   let signature: String?
   let certificate: String?
   let sent: Date
+  let location: Int?
 
-  init(text: String, signature: String? = nil, certificate: String? = nil) {
-    self.text = text
+  init(text: String, signature: String? = nil, certificate: String? = nil, location: Int? = nil) {
+    self.content = text
     self.id = UUID()
     self.signature = signature
     self.certificate = certificate
     self.sent = Date()
+    self.location = location
   }
 
   func hash(into hasher: inout Hasher) {

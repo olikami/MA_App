@@ -15,10 +15,19 @@ struct CommunityView: View {
   }
 
   var body: some View {
-    if let person = model.person {
-      ChatView(messages: model.communityMessages, sendMessage: sendMessage)
+    if let location = model.location {
+      NavigationView {
+        ChatView(messages: model.communityMessages, sendMessage: sendMessage).toolbar {
+          ToolbarItem(placement: .principal) {
+            VStack {
+              Text(postcodeFormatter(location)).font(.headline)
+              Text("Coumminity Chat").font(.subheadline)
+            }
+          }
+        }
+      }
     } else {
-      Text("Setup needed")
+      Text("Please setup your location in the settings.")
     }
   }
 }
