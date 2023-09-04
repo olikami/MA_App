@@ -26,4 +26,5 @@ class MessageSerializer(serializers.ModelSerializer):
             "sent",
             "signature",
             "certificate",
+            "location"
         ]
