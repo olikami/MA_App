@@ -24,3 +24,13 @@ class MessageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Message
         fields = ["id", "content", "sent", "signature", "certificate", "location"]
+
+
+class OfficialMessageSerializer(serializers.ModelSerializer):
+    locations = serializers.PrimaryKeyRelatedField(
+        many=True, queryset=Location.objects.all()
+    )
+
+    class Meta:
+        model = Message
+        fields = ["id", "content", "sent", "signature", "certificate", "locations"]

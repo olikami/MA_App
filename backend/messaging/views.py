@@ -1,6 +1,10 @@
 from rest_framework import viewsets, mixins
-from .models import Location, Message
-from .serializers import LocationSerializer, MessageSerializer
+from .models import Location, Message, OfficialMessage
+from .serializers import (
+    LocationSerializer,
+    MessageSerializer,
+    OfficialMessageSerializer,
+)
 
 
 class LocationViewSet(viewsets.ReadOnlyModelViewSet):
@@ -16,3 +20,13 @@ class MessageViewSet(
 ):
     queryset = Message.objects.all()
     serializer_class = MessageSerializer
+
+
+class OfficialMessageViewSet(
+    mixins.ListModelMixin,
+    mixins.RetrieveModelMixin,
+    mixins.CreateModelMixin,
+    viewsets.GenericViewSet,
+):
+    queryset = OfficialMessage.objects.all()
+    serializer_class = OfficialMessageSerializer

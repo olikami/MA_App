@@ -31,3 +31,15 @@ class Message(models.Model):
 
     def __str__(self):
         return f"Message at {self.sent.strftime('%Y-%m-%d %H:%M:%S')}"
+
+
+class OfficialMessage(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4)
+    content = models.TextField()
+    sent = models.DateTimeField(auto_now_add=True)
+    signature = models.CharField(max_length=1024)
+    certificate = models.TextField()
+    locations = models.ManyToManyField(Location)
+
+    def __str__(self):
+        return f"Official at {self.sent.strftime('%Y-%m-%d %H:%M:%S')}"
