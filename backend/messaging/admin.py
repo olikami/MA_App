@@ -15,7 +15,7 @@ admin.site.register(Message, MessageAdmin)
 
 
 class OfficialMessageAdmin(admin.ModelAdmin):
-    list_display = ("content", "sent", "locations")
+    list_display = ("content", "sent")
     list_filter = ("sent", "locations")
     search_fields = ("content",)
 
