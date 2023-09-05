@@ -433,7 +433,6 @@ class Model: ObservableObject {
 
       do {
         let messages = try DRFJSONCoder().decode([OfficialMessage].self, from: data)
-        print(messages)
         self.officialMessages = messages.filter { $0.locations.contains(self.location!) }
       } catch {
         print("Decoding error: \(error)")
