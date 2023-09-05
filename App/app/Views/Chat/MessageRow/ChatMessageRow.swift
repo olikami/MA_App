@@ -144,7 +144,7 @@ struct ChatMessageInfoView: View {
             &error)
 
           if signatureVerified {
-            signatureString = "Signature successfully verified.)"
+            signatureString = "Signature successfully verified."
           }
         }
       } catch let error {
