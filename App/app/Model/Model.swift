@@ -34,13 +34,20 @@ class Model: ObservableObject {
   @Published var location: Int? {
     didSet {
       stopFetchingCommunityMessages()
+      stopFetchingOfficialMessages()
       communityMessages = []
+      officialMessages = []
       saveData()
       startFetchingCommunityMessages()
+      startFetchingOfficialMessages()
     }
   }
   @Published var communityMessages: [Message] = []
   private var communityMessageTimer: Timer?
+
+  // Official messsages attributes
+  @Published var officialMessages: [OfficialMessage] = []
+  private var officialMessagesTimer: Timer?
 
   init() {
     loadData()
@@ -407,6 +414,49 @@ class Model: ObservableObject {
   }
 
   // End Messages
+
+  // Start Official Messages
+
+  func fetchOfficialMessages() {
+    print("Fetch official messages")
+    let url = URL(string: "https://master-thesis.oli.fyi/messages/official-messages/")!
+    let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+      guard error == nil else {
+        print("Error fetching data: \(error!)")
+        return
+      }
+
+      guard let data = data else {
+        print("No data fetched.")
+        return
+      }
+
+      do {
+        let messages = try DRFJSONCoder().decode([OfficialMessage].self, from: data)
+        print(messages)
+        self.officialMessages = messages.filter { $0.locations.contains(self.location!) }
+      } catch {
+        print("Decoding error: \(error)")
+      }
+    }
+
+    task.resume()
+  }
+
+  func startFetchingOfficialMessages() {
+    print("Start start fetching")
+    officialMessagesTimer = Timer.scheduledTimer(withTimeInterval: 60, repeats: true) { _ in
+      self.fetchOfficialMessages()
+    }
+    self.fetchOfficialMessages()
+  }
+
+  func stopFetchingOfficialMessages() {
+    officialMessagesTimer?.invalidate()
+    officialMessagesTimer = nil
+  }
+
+  // End Official Messages
 
   func generateKey() {
     self.generatePrivateKey()
