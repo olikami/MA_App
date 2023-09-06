@@ -15,17 +15,7 @@ struct OfficialView: View {
       NavigationView {
         VStack {
           ForEach(model.officialMessages, id: \.id) { message in
-            VStack(alignment: .leading) {
-              Text(message.content)
-              HStack {
-                Text("Official Message".uppercased()).foregroundColor(Color.gray).font(.caption)
-                Spacer()
-                Text(formatDateCompact(date: message.sent)).foregroundColor(Color.gray).font(
-                  .footnote)
-              }
-
-              Divider()
-            }
+            OfficialMessageRow(message: message)
           }
         }
         .padding()

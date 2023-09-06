@@ -11,6 +11,7 @@
 		4F1C52732A8E9C1D00EFBCCE /* WelcomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1C52722A8E9C1D00EFBCCE /* WelcomePage.swift */; };
 		4F1C52752A8EA08100EFBCCE /* NamePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1C52742A8EA08100EFBCCE /* NamePage.swift */; };
 		4F1C52772A8EA70500EFBCCE /* ConfirmName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1C52762A8EA70500EFBCCE /* ConfirmName.swift */; };
+		4F33D18F2AA8AF030055917D /* OfficialMessageRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F33D18E2AA8AF030055917D /* OfficialMessageRow.swift */; };
 		4F3B4C5A2A9E7472004E19A6 /* postcodeFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3B4C592A9E7472004E19A6 /* postcodeFormatter.swift */; };
 		4F3BB1E52A8F560400A6D56F /* CertificateSigningRequest in Frameworks */ = {isa = PBXBuildFile; productRef = 4F3BB1E42A8F560400A6D56F /* CertificateSigningRequest */; };
 		4F41F32D2A97B55A00121926 /* ISO8601DateFormatter+Exts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F41F32C2A97B55A00121926 /* ISO8601DateFormatter+Exts.swift */; };
@@ -58,6 +59,7 @@
 		4F1C52722A8E9C1D00EFBCCE /* WelcomePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomePage.swift; sourceTree = "<group>"; };
 		4F1C52742A8EA08100EFBCCE /* NamePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NamePage.swift; sourceTree = "<group>"; };
 		4F1C52762A8EA70500EFBCCE /* ConfirmName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmName.swift; sourceTree = "<group>"; };
+		4F33D18E2AA8AF030055917D /* OfficialMessageRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfficialMessageRow.swift; sourceTree = "<group>"; };
 		4F3B4C592A9E7472004E19A6 /* postcodeFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = postcodeFormatter.swift; sourceTree = "<group>"; };
 		4F41F32C2A97B55A00121926 /* ISO8601DateFormatter+Exts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ISO8601DateFormatter+Exts.swift"; sourceTree = "<group>"; };
 		4F41F32E2A97B7FD00121926 /* DRFJSONCoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DRFJSONCoder.swift; sourceTree = "<group>"; };
@@ -224,6 +226,7 @@
 			isa = PBXGroup;
 			children = (
 				4FA424402A8E396C00AFC23A /* OfficialView.swift */,
+				4F33D18E2AA8AF030055917D /* OfficialMessageRow.swift */,
 			);
 			path = Official;
 			sourceTree = "<group>";
@@ -362,6 +365,7 @@
 				4F41F3312A97E9D500121926 /* ApiCertificate.swift in Sources */,
 				4FA424492A8E3EB300AFC23A /* SettingsView.swift in Sources */,
 				4F63958E2AA70FCE0038F4CD /* OfficialMessage.swift in Sources */,
+				4F33D18F2AA8AF030055917D /* OfficialMessageRow.swift in Sources */,
 				4FD673F62A963071001AE9D3 /* ApiCSR.swift in Sources */,
 				4FA4243E2A8E395500AFC23A /* AroundYouView.swift in Sources */,
 				4FC74B422A8EB6FA00750FAA /* GenerateKeyPage.swift in Sources */,
