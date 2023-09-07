@@ -70,7 +70,7 @@
 		4F7326D52A9E6A9500546DB2 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		4F80C4DC2A9F56FB00AADBB7 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		4F8264DE2AA5C26C00E983BE /* formatDateCompact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = formatDateCompact.swift; sourceTree = "<group>"; };
-		4FA424112A8E36C000AFC23A /* app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = app.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4FA424112A8E36C000AFC23A /* COMUNI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = COMUNI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FA424142A8E36C000AFC23A /* appApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = appApp.swift; sourceTree = "<group>"; };
 		4FA424182A8E36C100AFC23A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4FA4241B2A8E36C100AFC23A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -125,7 +125,7 @@
 		4FA424122A8E36C000AFC23A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				4FA424112A8E36C000AFC23A /* app.app */,
+				4FA424112A8E36C000AFC23A /* COMUNI.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -287,9 +287,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		4FA424102A8E36C000AFC23A /* app */ = {
+		4FA424102A8E36C000AFC23A /* COMUNI */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4FA4241F2A8E36C100AFC23A /* Build configuration list for PBXNativeTarget "app" */;
+			buildConfigurationList = 4FA4241F2A8E36C100AFC23A /* Build configuration list for PBXNativeTarget "COMUNI" */;
 			buildPhases = (
 				4FA4240D2A8E36C000AFC23A /* Sources */,
 				4FA4240E2A8E36C000AFC23A /* Frameworks */,
@@ -299,13 +299,13 @@
 			);
 			dependencies = (
 			);
-			name = app;
+			name = COMUNI;
 			packageProductDependencies = (
 				4F3BB1E42A8F560400A6D56F /* CertificateSigningRequest */,
 				4F7F7DFC2A9891EA005B06F8 /* X509 */,
 			);
 			productName = app;
-			productReference = 4FA424112A8E36C000AFC23A /* app.app */;
+			productReference = 4FA424112A8E36C000AFC23A /* COMUNI.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -323,7 +323,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 4FA4240C2A8E36C000AFC23A /* Build configuration list for PBXProject "app" */;
+			buildConfigurationList = 4FA4240C2A8E36C000AFC23A /* Build configuration list for PBXProject "COMUNI" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -340,7 +340,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				4FA424102A8E36C000AFC23A /* app */,
+				4FA424102A8E36C000AFC23A /* COMUNI */,
 			);
 		};
 /* End PBXProject section */
@@ -534,6 +534,7 @@
 				DEVELOPMENT_TEAM = 9WR5QFWF8R;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = CommuniChat;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -566,6 +567,7 @@
 				DEVELOPMENT_TEAM = 9WR5QFWF8R;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = CommuniChat;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -590,7 +592,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		4FA4240C2A8E36C000AFC23A /* Build configuration list for PBXProject "app" */ = {
+		4FA4240C2A8E36C000AFC23A /* Build configuration list for PBXProject "COMUNI" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4FA4241D2A8E36C100AFC23A /* Debug */,
@@ -599,7 +601,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4FA4241F2A8E36C100AFC23A /* Build configuration list for PBXNativeTarget "app" */ = {
+		4FA4241F2A8E36C100AFC23A /* Build configuration list for PBXNativeTarget "COMUNI" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4FA424202A8E36C100AFC23A /* Debug */,
