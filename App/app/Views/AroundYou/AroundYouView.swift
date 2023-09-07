@@ -11,8 +11,19 @@ struct AroundYouView: View {
   @EnvironmentObject private var model: Model
 
   var body: some View {
-
-    Text("Setup needed")
+    if (model.person != nil) && model.hasKey && (model.certificate_string != nil) {
+      NavigationView {
+        List {
+          Section("Chats") {
+            if model.localChats.isEmpty {
+              Text("No Chats")
+            }
+          }
+        }
+      }
+    } else {
+      Text("Setup needed")
+    }
   }
 }
 
