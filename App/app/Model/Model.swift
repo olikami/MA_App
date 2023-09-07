@@ -179,7 +179,7 @@ class Model: ObservableObject {
   func fingerprint() -> String? {
 
     if let cfData = self.getPublicKeyData() as Data? {
-      return app.fingerprint(publicKeyData: cfData)
+      return COMUNI.fingerprint(publicKeyData: cfData)
     }
 
     return nil
