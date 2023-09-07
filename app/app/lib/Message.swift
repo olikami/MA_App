@@ -14,14 +14,19 @@ struct Message: Codable, Hashable {
   let certificate: String?
   let sent: Date
   let location: Int?
+  let from: Person?
 
-  init(text: String, signature: String? = nil, certificate: String? = nil, location: Int? = nil) {
+  init(
+    text: String, signature: String? = nil, certificate: String? = nil, location: Int? = nil,
+    from: Person? = nil
+  ) {
     self.content = text
     self.id = UUID()
     self.signature = signature
     self.certificate = certificate
     self.sent = Date()
     self.location = location
+    self.from = from
   }
 
   func hash(into hasher: inout Hasher) {

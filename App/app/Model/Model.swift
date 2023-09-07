@@ -9,11 +9,12 @@ import CertificateSigningRequest
 import Combine
 import CommonCrypto
 import Foundation
+import MultipeerConnectivity
 import Security
 import SwiftUI
 import X509
 
-class Model: ObservableObject {
+class Model: NSObject, ObservableObject {
 
   @Published var person: Person?
 
@@ -49,7 +50,26 @@ class Model: ObservableObject {
   @Published var officialMessages: [OfficialMessage] = []
   private var officialMessagesTimer: Timer?
 
-  init() {
+  // Local chat attributes
+  private let serviceType = "COMUNILocal"
+  private var localMessageSession: MCSession
+  private var localMessageServiceAdvertiser: MCNearbyServiceAdvertiser
+  private var localMessageServiceBrowser: MCNearbyServiceBrowser
+
+  private let localMessageEncoder = PropertyListEncoder()
+  private let localMessageDecoder = PropertyListDecoder()
+
+  @Published var localPeers: [MCPeerID] = []
+  @Published var localChats: [Person: Chat] = [:]
+
+  override init() {
+    let peerID = MCPeerID(displayName: "Startup")
+    self.localMessageSession = MCSession(
+      peer: peerID, securityIdentity: nil, encryptionPreference: .none)
+    self.localMessageServiceAdvertiser = MCNearbyServiceAdvertiser(
+      peer: peerID, discoveryInfo: nil, serviceType: serviceType)
+    self.localMessageServiceBrowser = MCNearbyServiceBrowser(peer: peerID, serviceType: serviceType)
+    super.init()
     loadData()
   }
 
@@ -457,6 +477,101 @@ class Model: ObservableObject {
 
   // End Official Messages
 
+  // Start Local Messages
+  func startLocalMessages() {
+    let peerID = MCPeerID(displayName: self.person!.name)
+    self.localMessageSession = MCSession(
+      peer: peerID, securityIdentity: nil, encryptionPreference: .none)
+    self.localMessageServiceAdvertiser = MCNearbyServiceAdvertiser(
+      peer: peerID, discoveryInfo: nil, serviceType: serviceType)
+    self.localMessageServiceBrowser = MCNearbyServiceBrowser(peer: peerID, serviceType: serviceType)
+
+    self.localMessageSession.delegate = self
+    self.localMessageServiceAdvertiser.delegate = self
+    self.localMessageServiceBrowser.delegate = self
+
+    self.localMessageServiceAdvertiser.startAdvertisingPeer()
+    self.localMessageServiceBrowser.startBrowsingForPeers()
+  }
+
+  func sendLocalMessage(_ messageText: String, chat: Chat) {
+    print("send: \(messageText) to \(chat.peer.displayName)")
+
+    DispatchQueue.main.async {
+      guard let messageData = messageText.data(using: .utf8) else { return }
+      guard let privateKey = self.getPrivateKey() else { return }
+
+      // Create a signature
+      var error: Unmanaged<CFError>?
+      guard
+        let signature = SecKeyCreateSignature(
+          privateKey,
+          .rsaSignatureDigestPKCS1v15SHA512,
+          messageData as CFData,
+          &error
+        )
+      else {
+        print("Error signing message: \(String(describing: error?.takeRetainedValue()))")
+        return
+      }
+
+      // Convert the signature to Base64 string for easier storage/transmission
+      let signatureString = (signature as Data).base64EncodedString()
+      let newMessage = ConnectMessage(
+        messageType: .Message,
+        message: Message(
+          text: messageText, signature: signatureString, certificate: self.certificate_string))
+      if !self.localMessageSession.connectedPeers.isEmpty {
+        do {
+          if let data = try? self.localMessageEncoder.encode(newMessage) {
+            DispatchQueue.main.async {
+              self.localChats[chat.person]?.messages.append(newMessage.message!)
+            }
+            try self.localMessageSession.send(data, toPeers: [chat.peer], with: .reliable)
+          }
+        } catch {
+          print("Error for sending: \(String(describing: error))")
+        }
+      }
+    }
+  }
+
+  func reciveInfo(info: ConnectMessage, from: MCPeerID) {
+    print("Recived Info", info.messageType)
+    if info.messageType == .Message {
+      newMessage(message: info.message!, from: from)
+    }
+    if info.messageType == .PeerInfo {
+      newPerson(person: info.peerInfo!, from: from)
+    }
+  }
+
+  func newConnection(peer: MCPeerID) {
+    print("New Connection ", peer.displayName)
+
+    let newMessage = ConnectMessage(messageType: .PeerInfo, peerInfo: self.person)
+    do {
+      if let data = try? self.localMessageEncoder.encode(newMessage) {
+        try self.localMessageSession.send(data, toPeers: [peer], with: .reliable)
+      }
+    } catch {
+      print("Error for newConnection: \(String(describing: error))")
+    }
+  }
+
+  func newPerson(person: Person, from: MCPeerID) {
+    print("New Person ", person.name)
+    self.localChats[person] = Chat(peer: from, person: person)
+
+  }
+
+  func newMessage(message: Message, from: MCPeerID) {
+    print("New Message ", message.content)
+    self.localChats[message.from!]!.messages.append(message)
+  }
+
+  // Ened Local Messages
+
   func generateKey() {
     self.generatePrivateKey()
   }
@@ -503,5 +618,85 @@ class Model: ObservableObject {
     self.certificate_string = UserDefaults.standard.string(forKey: "CertificateString")
     self.hasKey = UserDefaults.standard.bool(forKey: "HasKey")
     self.location = UserDefaults.standard.integer(forKey: "Location")
+  }
+}
+
+extension Model: MCNearbyServiceAdvertiserDelegate {
+  func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didNotStartAdvertisingPeer error: Error)
+  {
+    print("ServiceAdvertiser didNotStartAdvertisingPeer: \(String(describing: error))")
+  }
+
+  func advertiser(
+    _ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID,
+    withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void
+  ) {
+    print("didReceiveInvitationFromPeer \(peerID)")
+    DispatchQueue.main.async {
+      invitationHandler(true, self.localMessageSession)
+    }
+  }
+}
+
+extension Model: MCSessionDelegate {
+  func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
+    print("peer \(peerID) didChangeState: \(state.rawValue)")
+    DispatchQueue.main.async {
+      if state == .connected {
+        self.newConnection(peer: peerID)
+      }
+      self.localPeers = session.connectedPeers
+    }
+  }
+
+  func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
+    print("didReceive bytes \(data.count) bytes")
+    if let message = try? self.localMessageDecoder.decode(ConnectMessage.self, from: data) {
+      DispatchQueue.main.async {
+        self.reciveInfo(info: message, from: peerID)
+      }
+    }
+  }
+
+  public func session(
+    _ session: MCSession, didReceive stream: InputStream, withName streamName: String,
+    fromPeer peerID: MCPeerID
+  ) {
+    print("Receiving streams is not supported")
+  }
+
+  public func session(
+    _ session: MCSession, didStartReceivingResourceWithName resourceName: String,
+    fromPeer peerID: MCPeerID, with progress: Progress
+  ) {
+    print("Receiving resources is not supported")
+  }
+
+  public func session(
+    _ session: MCSession, didFinishReceivingResourceWithName resourceName: String,
+    fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?
+  ) {
+    print("Receiving resources is not supported")
+  }
+}
+
+extension Model: MCNearbyServiceBrowserDelegate {
+  func browser(_ browser: MCNearbyServiceBrowser, didNotStartBrowsingForPeers error: Error) {
+    print("ServiceBrowser didNotStartBrowsingForPeers: \(String(describing: error))")
+
+  }
+
+  func browser(
+    _ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID,
+    withDiscoveryInfo info: [String: String]?
+  ) {
+    print("ServiceBrowser found peer: \(peerID)")
+    DispatchQueue.main.async {
+      browser.invitePeer(peerID, to: self.localMessageSession, withContext: nil, timeout: 10)
+    }
+  }
+
+  func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
+    print("ServiceBrowser lost peer: \(peerID)")
   }
 }
