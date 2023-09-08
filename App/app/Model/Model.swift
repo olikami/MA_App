@@ -520,7 +520,8 @@ class Model: NSObject, ObservableObject {
       let newMessage = ConnectMessage(
         messageType: .Message,
         message: Message(
-          text: messageText, signature: signatureString, certificate: self.certificate_string))
+          text: messageText, signature: signatureString, certificate: self.certificate_string,
+          from: self.person))
       if !self.localMessageSession.connectedPeers.isEmpty {
         do {
           if let data = try? self.localMessageEncoder.encode(newMessage) {
