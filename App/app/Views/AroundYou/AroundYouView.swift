@@ -17,6 +17,19 @@ struct AroundYouView: View {
           Section("Chats") {
             if model.localChats.isEmpty {
               Text("No Chats")
+            } else {
+              ForEach(Array(model.localChats), id: \.value.id) { id, chat in
+                Text(chat.peer.displayName)
+              }
+            }
+          }
+          Section("Near-By Peers") {
+            if model.localPeers.isEmpty {
+              Text("No Peers")
+            } else {
+              ForEach(model.localPeers, id: \.hash) { peer in
+                Text(peer.displayName)
+              }
             }
           }
         }

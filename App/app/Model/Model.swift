@@ -41,6 +41,7 @@ class Model: NSObject, ObservableObject {
       saveData()
       startFetchingCommunityMessages()
       startFetchingOfficialMessages()
+      startLocalMessages()
     }
   }
   @Published var communityMessages: [Message] = []
