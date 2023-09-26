@@ -10,6 +10,10 @@ import SwiftUI
 struct AroundYouView: View {
   @EnvironmentObject private var model: Model
 
+  func sendMessage(message: String, chat: Chat) {
+    model.sendLocalMessage(message, chat: chat)
+  }
+
   var body: some View {
     if (model.person != nil) && model.hasKey && (model.certificate_string != nil) {
       NavigationView {
@@ -19,6 +23,7 @@ struct AroundYouView: View {
               Text("No Chats")
             } else {
               ForEach(Array(model.localChats), id: \.value.id) { id, chat in
+
                 Text(chat.peer.displayName)
               }
             }

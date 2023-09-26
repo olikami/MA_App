@@ -41,7 +41,9 @@ class Model: NSObject, ObservableObject {
       saveData()
       startFetchingCommunityMessages()
       startFetchingOfficialMessages()
-      startLocalMessages()
+      if self.person != nil && self.person?.name != nil {
+        startLocalMessages()
+      }
     }
   }
   @Published var communityMessages: [Message] = []
@@ -125,7 +127,6 @@ class Model: NSObject, ObservableObject {
   }
 
   func getPrivateKey() -> SecKey? {
-    //Get generated public key
     let query: [String: Any] = [
       String(kSecClass): kSecClassKey,
       String(kSecAttrKeyType): algorithm.secKeyAttrType,
@@ -143,7 +144,6 @@ class Model: NSObject, ObservableObject {
   }
 
   func getPublicKey() -> SecKey? {
-    //Get generated public key
     let query: [String: Any] = [
       String(kSecClass): kSecClassKey,
       String(kSecAttrKeyType): algorithm.secKeyAttrType,

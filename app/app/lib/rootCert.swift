@@ -14,7 +14,9 @@ func isRootCert(certificate: Certificate) -> Bool {
 
   do {
     let rootCert = try Certificate(pemEncoded: rootString)
-    if rootCert.serialNumber == certificate.serialNumber {
+    if rootCert.serialNumber == certificate.serialNumber
+      && rootCert.publicKey == certificate.publicKey
+    {
       return true
     }
   } catch let error {

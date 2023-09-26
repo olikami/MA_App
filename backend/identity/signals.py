@@ -2,7 +2,7 @@ import os
 from datetime import datetime, timedelta
 
 from cryptography import x509
-from cryptography.hazmat.primitives import serialization, hashes
+from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives._serialization import Encoding
 from django.db.models.signals import post_save
 from django.dispatch import receiver
@@ -50,7 +50,6 @@ def create_certificate(sender, instance, **kwargs):
                 # Our certificate will be valid for 60 days
                 datetime.utcnow()
                 + timedelta(days=60)
-                # Sign our certificate with our private key
             )
             .sign(private_ca_key, hashes.SHA256())
         )
